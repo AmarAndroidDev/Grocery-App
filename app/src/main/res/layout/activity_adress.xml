@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    tools:context=".Activity.Activity.AdressActivity">
+
+    <Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/bg2"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/tit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawablePadding="10dp"
+            android:text="My Adress"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/curentLocation" />
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/backarrow"
+            android:backgroundTint="@color/white" />
+    </Toolbar>
+<LinearLayout
+    android:layout_marginTop="10dp"
+    android:id="@+id/currentLoc"
+  android:gravity="center"
+    android:background="@color/lightgreenBg"
+    android:layout_below="@+id/toolbar2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/baseline_gps_fixed_24"
+android:drawableTint="@color/red"
+
+
+        android:id="@+id/curentLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+      android:gravity="center"
+
+
+        android:text="Use My Current Location"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+
+
+         />
+</LinearLayout>
+<LinearLayout
+    android:layout_marginTop="10dp"
+    android:gravity="center"
+    android:id="@+id/edtManualy"
+    android:layout_below="@+id/currentLoc"
+    android:layout_width="match_parent"
+    android:background="@color/lightgreenBg"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+
+        android:drawableLeft="@drawable/baseline_edit_24"
+
+
+        android:id="@+id/edit_manualy"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+android:gravity="center"
+
+
+        android:drawablePadding="10dp"
+        android:text="Edit Manualy"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/curentLocation" />
+</LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:backgroundTint="@color/white"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/card"
+        android:layout_below="@+id/edtManualy"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+        <LinearLayout
+android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_marginRight="10dp"
+                    android:hint="Apartment/House"
+
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxStrokeColor="@color/bg2"
+                    app:boxStrokeWidth="1dp"
+
+                    app:counterMaxLength="20"
+                    app:endIconMode="clear_text"
+
+
+                    app:errorIconDrawable="@drawable/baseline_error_24"
+                    app:errorIconTint="@color/merun"
+                    app:errorTextColor="@color/merun"
+                    app:helperTextTextColor="@color/merun"
+
+
+
+                    app:startIconDrawable="@drawable/baseline_house_24"
+                    app:startIconTint="@color/bg2">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/apart_house"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+android:enabled="false"
+                        android:backgroundTint="@color/white"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/black"
+                        android:gravity="center_vertical"
+
+                        android:inputType="text"
+                        android:maxLength="40"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black"
+
+
+                        android:textCursorDrawable="@drawable/edt_cursor_bg"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="Locality"
+
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxStrokeColor="@color/bg2"
+                    app:boxStrokeWidth="1dp"
+
+                    app:counterMaxLength="20"
+                    app:endIconMode="clear_text"
+
+
+                    app:errorIconDrawable="@drawable/baseline_error_24"
+                    app:errorIconTint="@color/merun"
+                    app:errorTextColor="@color/merun"
+                    app:helperTextTextColor="@color/merun"
+
+
+
+                    app:startIconDrawable="@drawable/city2"
+                    app:startIconTint="@color/bg2">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/locality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:enabled="false"
+                        android:backgroundTint="@color/white"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/black"
+                        android:gravity="center_vertical"
+
+                        android:inputType="text"
+                        android:maxLength="40"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black"
+
+
+                        android:textCursorDrawable="@drawable/edt_cursor_bg"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>                <com.google.android.material.textfield.TextInputLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="Landmark"
+
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxStrokeColor="@color/bg2"
+                    app:boxStrokeWidth="1dp"
+
+                    app:counterMaxLength="20"
+                    app:endIconMode="clear_text"
+
+
+                    app:errorIconDrawable="@drawable/baseline_error_24"
+                    app:errorIconTint="@color/merun"
+                    app:errorTextColor="@color/merun"
+                    app:helperTextTextColor="@color/merun"
+
+
+
+                    app:startIconDrawable="@drawable/city2"
+                    app:startIconTint="@color/bg2">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/landmark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:enabled="false"
+                        android:backgroundTint="@color/white"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/black"
+                        android:gravity="center_vertical"
+
+                        android:inputType="text"
+                        android:maxLength="40"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black"
+
+
+                        android:textCursorDrawable="@drawable/edt_cursor_bg"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/box"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+
+                android:layout_marginRight="10dp"
+                android:hint="City"
+
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxStrokeColor="@color/bg2"
+                app:boxStrokeWidth="1dp"
+
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+
+
+                app:errorIconDrawable="@drawable/city2"
+                app:errorIconTint="@color/merun"
+                app:errorTextColor="@color/merun"
+                app:helperTextTextColor="@color/merun"
+
+
+
+                app:startIconDrawable="@drawable/city2"
+                app:startIconTint="@color/bg2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:enabled="false"
+                    android:backgroundTint="@color/white"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/black"
+                    android:gravity="center_vertical"
+
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/black"
+
+
+                    android:textCursorDrawable="@drawable/edt_cursor_bg"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/box"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+
+                android:layout_marginRight="10dp"
+                android:hint="Pincode"
+
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxStrokeColor="@color/bg2"
+                app:boxStrokeWidth="1dp"
+
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+
+
+                app:errorIconDrawable="@drawable/pincode2"
+                app:errorIconTint="@color/merun"
+                app:errorTextColor="@color/merun"
+                app:helperTextTextColor="@color/merun"
+
+
+
+                app:startIconDrawable="@drawable/pincode2"
+                app:startIconTint="@color/bg2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:enabled="false"
+                    android:backgroundTint="@color/white"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/black"
+                    android:gravity="center_vertical"
+
+                    android:inputType="textEmailAddress"
+                    android:maxLength="6"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/black"
+
+
+                    android:textCursorDrawable="@drawable/edt_cursor_bg"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fullAdLayout"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:hint="Full Adress"
+
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxStrokeColor="@color/bg2"
+                app:boxStrokeWidth="1dp"
+
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+
+
+                app:errorIconDrawable="@drawable/baseline_error_24"
+                app:errorIconTint="@color/merun"
+                app:errorTextColor="@color/merun"
+                app:helperTextTextColor="@color/merun"
+
+
+
+                app:startIconDrawable="@drawable/baseline_location_on_24"
+                app:startIconTint="@color/bg2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/full_adress"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:enabled="false"
+                    android:backgroundTint="@color/white"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/black"
+                    android:gravity="center_vertical"
+
+                    android:inputType="textEmailAddress"
+                    android:maxLength="70"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/black"
+
+
+                    android:textCursorDrawable="@drawable/edt_cursor_bg"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_below="@+id/card"
+        android:id="@+id/btn_adress_update"
+        android:layout_width="wrap_content"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:layout_height="40dp"
+       android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_bg"
+        android:gravity="center"
+        android:text="Update"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+/>
+</RelativeLayout>

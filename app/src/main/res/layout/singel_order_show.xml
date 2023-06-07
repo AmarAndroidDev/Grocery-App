@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+app:cardElevation="10dp"
+app:cardCornerRadius="15dp"
+android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+ android:layout_marginTop="2.5dp"
+    android:layout_marginBottom="2.5dp"
+
+
+
+
+
+    >
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_weight="2"
+        android:elevation="10dp"
+        android:id="@+id/rooot"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/titlee">
+
+        <ImageView
+
+            android:id="@+id/cart_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/black"
+            android:scaleType="fitXY" />
+
+        <TextView
+
+            android:id="@+id/not_available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:maxLines="1"
+            android:text="not available"
+            android:textAllCaps="true"
+            android:textColor="@color/merun"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </androidx.cardview.widget.CardView>
+
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_toRightOf="@+id/rooot"
+        android:layout_marginLeft="3dp"
+        android:id="@+id/titlee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        app:layout_constraintStart_toEndOf="@+id/rooot"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+android:layout_marginTop="3dp"
+            android:id="@+id/cart_name"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:maxLines="1"
+            android:text="onion"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <RelativeLayout
+            android:layout_below="@+id/titlee"
+            android:layout_toRightOf="@+id/rooot"
+
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/rooot"
+            app:layout_constraintTop_toBottomOf="@+id/titlee">
+
+            <LinearLayout
+
+                android:id="@+id/lay1"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titlee"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:text="Qty : "
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/qty"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:text="onion"
+
+                    android:textSize="15sp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+
+                android:id="@+id/titleeee"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lay1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:text="Unit : "
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/unit"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:text="onion"
+                    android:textSize="15sp"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+android:paddingBottom="3dp"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleeeeee"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:text="Total : "
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/cart_totalPrice"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:text="onion"
+                    android:textColor="@color/purple_700"
+                    android:textSize="15sp"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/titleeeeee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleeee"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:text="Price :"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/cart_price"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:text=" onion"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

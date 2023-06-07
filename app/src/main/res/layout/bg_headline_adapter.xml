@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="#F8568D"
+    android:layout_margin="5dp"
+    android:id="@+id/root_layout_profile"
+    >
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+       >
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:textSize="12dp"
+        android:text="amarendra"
+        android:textColor="@color/white"
+        android:id="@+id/profile_title"
+        android:layout_width="80dp"
+        android:maxLines="1"
+        android:layout_marginBottom="8dp"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Activity.ViewAllActivity">
+<include android:id="@+id/tooll"
+    layout="@layout/toolbar"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/tooll"
+        android:id="@+id/single__prdt_rcv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/checkout_layout"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/total"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="Total Price:"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:layout_below="@+id/total"
+            android:layout_marginLeft="55dp"
+            android:id="@+id/total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="20"
+            android:textColor="#E91E63"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+
+        <androidx.cardview.widget.CardView
+
+            android:id="@+id/checkout"
+            android:layout_width="130dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+
+            app:cardCornerRadius="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/white"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:maxLines="1"
+                android:text="CHECK OUT"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</RelativeLayout>
