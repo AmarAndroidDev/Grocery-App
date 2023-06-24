@@ -51,7 +51,7 @@ import java.util.Map;
 
 public class AdressActivity extends AppCompatActivity implements LocationListener {
     private TextInputEditText locality, pin, city, apartment, fulladress, landmark;
-    private LinearLayout edtManualy, curentLocation;
+    private TextView edtManualy, curentLocation;
 
     private AppCompatButton add, edit, update;
     private TextInputLayout fullAdLay;
@@ -79,7 +79,7 @@ public class AdressActivity extends AppCompatActivity implements LocationListene
         viewInitialize();
         database = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
-        addPreviousAdress();
+      //  addPreviousAdress();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,9 +93,8 @@ public class AdressActivity extends AppCompatActivity implements LocationListene
             @Override
             public void onClick(View view) {
                 dialog2 = new ProgressDialog(AdressActivity.this);
-                dialog2.setIcon(R.drawable.baseline_location_on_24);
-                dialog2.setTitle("Fetching Location");
-                dialog2.setMessage("Please Wait...");
+
+                dialog2.setMessage("Fetching Location...");
                 dialog2.setCancelable(false);
                 dialog2.show();
                 fulladress.setVisibility(View.VISIBLE);
@@ -330,11 +329,11 @@ public class AdressActivity extends AppCompatActivity implements LocationListene
         back=findViewById(R.id.back);
         fullAdLay=findViewById(R.id.fullAdLayout);
 
-        curentLocation=findViewById(R.id.currentLoc);
+        curentLocation=findViewById(R.id.curentLocation);
 
         update=findViewById(R.id.btn_adress_update);
 
-        edtManualy=findViewById(R.id.edtManualy);
+        edtManualy=findViewById(R.id.edit_manualy);
         edCardView=findViewById(R.id.cardView2);
 
 

@@ -46,7 +46,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String notificationTitle = message.getData().get("notificationtitle");
             String notificationmessage = message.getData().get("notificationmessage");
             if (auth.getUid().equals(
-                    "ODR0CUvoQ5ecbEaU2ZWVENCLGEt2")) {
+                    "YC7vLsrOpiVkMBqOcseWHL1BLTH3")) {
                 ShowNotification(orderId, buyeruid, sellerId, notificationTitle, notificationmessage, notificationType);
                 Log.d("mine", "onMessageReceived: " + message.getData().toString());
 
@@ -60,7 +60,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String notificationTitle = message.getData().get("notificationtitle");
             String notificationmessage = message.getData().get("notificationmessage");
             if (auth.getUid().equals(
-                    "ODR0CUvoQ5ecbEaU2ZWVENCLGEt2")) {
+                    "YC7vLsrOpiVkMBqOcseWHL1BLTH3")) {
                 ShowNotification(orderId, buyeruid, sellerId, notificationTitle, notificationmessage, notificationType);
                 Log.d("mine", "onMessageReceived: " + message.getData().toString());
 

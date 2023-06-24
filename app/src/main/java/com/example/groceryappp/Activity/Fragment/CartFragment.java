@@ -14,7 +14,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,19 +22,16 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.groceryappp.Activity.Activity.ProfileActivity;
 import com.example.groceryappp.Activity.Activity.UserPlaceOrderActivity;
 import com.example.groceryappp.Activity.Adapter.CartAdapter;
 import com.example.groceryappp.Activity.AllModel.AdressModel;
 import com.example.groceryappp.Activity.AllModel.SingleOrderDetails;
-import com.example.groceryappp.Activity.HomeActivity;
 import com.example.groceryappp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.inappmessaging.internal.injection.modules.GrpcChannelModule_ProvidesGrpcChannelFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +45,7 @@ public class CartFragment extends Fragment {
     CartAdapter adapter;
     FirebaseFirestore database;
     SingleOrderDetails details;
-ProgressDialog progressDialog;
+
     FirebaseAuth auth;
     AdressModel model;
     String name;
@@ -58,7 +54,7 @@ ProgressDialog progressDialog;
     int tempSum;
     AppCompatButton shopNow;
 
-    TextView sum, savedPrice, addAdress, txtAdress;
+    TextView sum, addAdress, txtAdress;
     public BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -73,7 +69,7 @@ ProgressDialog progressDialog;
 
        int  plusmarketprice=intent.getIntExtra("plusmarketprice",0);
        int finalsaved=plusmarketprice-sumPlus;
-            savedPrice.setText("₹"+finalsaved);
+
         }
     };
     public BroadcastReceiver receiver7 = new BroadcastReceiver() {
@@ -82,7 +78,7 @@ ProgressDialog progressDialog;
 int minusmarketprice=intent.getIntExtra("minusmarketprice",0);
 
             int finalsaved=minusmarketprice-sumMinus;
-            savedPrice.setText("₹"+finalsaved);
+
 
         }
     };
@@ -99,7 +95,7 @@ sumPlus=intent.getIntExtra("sumplus",0);
         public void onReceive(Context context, Intent intent) {
             int totalmarketprice=intent.getIntExtra("totalmarketprice",0);
             int finalsaved=totalmarketprice-tempSum;
-            savedPrice.setText("₹" + finalsaved);
+
         }
     };
     public BroadcastReceiver receiver3 = new BroadcastReceiver() {
@@ -142,7 +138,7 @@ sumPlus=intent.getIntExtra("sumplus",0);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         viewInitialize(view);
-        fetchingDialog();
+
         list = new ArrayList<>();
         cartList = new ArrayList<>();
         rcvCart.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -158,7 +154,8 @@ sumPlus=intent.getIntExtra("sumplus",0);
             public void onClick(View view) {
 
                         Intent intent = new Intent(getContext(), UserPlaceOrderActivity.class);
-                        intent.putExtra("sum", sum.getText().toString().replace("₹",""));
+                      String summ=sum.getText().toString().replace("₹","");
+                        intent.putExtra("sum",summ );
                         intent.putExtra("list", list);
                         startActivity(intent);
 
@@ -182,6 +179,7 @@ sumPlus=intent.getIntExtra("sumplus",0);
 
 
 
+
         database = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         database.collection("CurrentUser").document(auth.getCurrentUser().getUid()).collection("cart").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -198,19 +196,23 @@ sumPlus=intent.getIntExtra("sumplus",0);
                             placeOrderActivity.setVisibility(View.VISIBLE);
                             emptyCart.setVisibility(View.GONE);
 
-
-
                         }
+
+
                     }else {
                         placeOrderActivity.setVisibility(View.GONE);
                         emptyCart.setVisibility(View.VISIBLE);
+
                     }
 
 
                 }
 
                 adapter.notifyDataSetChanged();
-                progressDialog.dismiss();
+
+                if (list.size()==0){
+                    emptyCart.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -228,7 +230,7 @@ sumPlus=intent.getIntExtra("sumplus",0);
 
         rcvCart = view.findViewById(R.id.rcv_cart);
         sum = view.findViewById(R.id.sum);
-        savedPrice = view.findViewById(R.id.savePrice);
+
         placeOrderActivity = view.findViewById(R.id.placeOrderLayout);
         emptyCart = view.findViewById(R.id.emptycart);
 
@@ -241,10 +243,11 @@ sumPlus=intent.getIntExtra("sumplus",0);
 
 
     }
-    private void fetchingDialog() {
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading....");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+
+
+    @Override
+    public void onResume() {
+        emptyCart.setVisibility(View.GONE);
+        super.onResume();
     }
 }

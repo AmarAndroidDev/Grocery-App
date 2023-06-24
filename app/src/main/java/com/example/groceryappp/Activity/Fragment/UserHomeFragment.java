@@ -10,25 +10,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
-import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.ViewFlipper;
 
 import com.example.groceryappp.Activity.Adapter.HeadLineCircular;
 import com.example.groceryappp.Activity.Adapter.MixVegPriceDetails;
 import com.example.groceryappp.Activity.Adapter.ViewPagerAdapter;
 import com.example.groceryappp.Activity.AllModel.Headline;
 import com.example.groceryappp.Activity.AllModel.SingleProductDetails;
-import com.example.groceryappp.Activity.HomeActivity;
 import com.example.groceryappp.R;
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -48,7 +42,6 @@ public class UserHomeFragment extends Fragment {
     TabLayout tableLayout;
     ViewPager pager2;
     DotsIndicator indicator;
-    private ProgressDialog progressDialog;
     ArrayList<Integer> listviewpager;
 
 
@@ -82,13 +75,13 @@ public class UserHomeFragment extends Fragment {
         //adding viewpager
 
         listviewpager=new ArrayList<>();
-        listviewpager.add(R.drawable.viewpagerimg1);
-        listviewpager.add(R.drawable.grapes);
-        listviewpager.add(R.drawable.potato);
+        listviewpager.add(R.drawable.img_7);
+        listviewpager.add(R.drawable.img_10);
+        listviewpager.add(R.drawable.tomatofinal);
 
-        listviewpager.add(R.drawable.pomkin);
-        listviewpager.add(R.drawable.leafies);
-        fetchingDialog();
+        listviewpager.add(R.drawable.img_8);
+        listviewpager.add(R.drawable.img_9);
+
         fetchingItemsOfSeller();
         fetchingCtegoryItemOfSeller();
         pager2.setAdapter(new ViewPagerAdapter(getContext(),listviewpager));
@@ -172,15 +165,9 @@ dialog.dismiss();
         vegtableAdapter.notifyDataSetChanged();
 
     }
-    private void fetchingDialog() {
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading  Items....");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-    }
+
     private void fetchingItemsOfSeller(){
-        database.collection("CurrentUser").document(
-                "ODR0CUvoQ5ecbEaU2ZWVENCLGEt2").collection("All Item").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        database.collection("CurrentUser").document("YC7vLsrOpiVkMBqOcseWHL1BLTH3").collection("All Item").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                                                                        @Override
                                                                                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                                                                            for (QueryDocumentSnapshot q : task.getResult()) {
@@ -191,14 +178,14 @@ dialog.dismiss();
                                                                                                            }
 
                                                                                                            vegtableAdapter.notifyDataSetChanged();
-                                                                                                           progressDialog.dismiss();
+
 
                                                                                                        }
                                                                                                    }
         ).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
+
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -210,19 +197,19 @@ dialog.dismiss();
                                                                         @Override
                                                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                                             for (QueryDocumentSnapshot q : task.getResult()) {
-                                                                                // SingleProductDetails singleProductDetails=q.toObject(SingleProductDetails.class);
+                                                                                // SingleProductDetails singleProductDetails=q.toObject(SingleProductDetails.class)
                                                                                 //  list2.add(singleProductDetails);
-                                                                                list.add(new Headline(q.get("name").toString(), q.get("type").toString()));
+                                                                                list.add(new Headline(q.get("name").toString(),q.get("type").toString(),q.get("img").toString()));
 
                                                                             }
                                                                             adapter.notifyDataSetChanged();
-progressDialog.dismiss();
+
                                                                         }
                                                                     }
         ).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
+
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

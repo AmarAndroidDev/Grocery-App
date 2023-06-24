@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.groceryappp.Activity.HomeActivity;
 import com.example.groceryappp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,12 +52,11 @@ public class SplashActivity extends AppCompatActivity {
                 String type = String.valueOf(documentSnapshot.get("accountType"));
                 if (type.equals("Seller")) {
 Intent intent=new Intent(SplashActivity.this, AdminHomeActivity.class);
-
                     startActivity(intent);
                     finish();
 
                 }
-                if (type.equals("user")) {
+                if (type.equals("User")) {
 
                     Intent intent=new Intent(SplashActivity.this, HomeActivity.class);
 

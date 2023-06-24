@@ -24,21 +24,6 @@ public class AdminList implements Serializable {
         this.imgUri = imgUri;
     }
 
-    public String getId() {
-        return id;
-    }
-    String imgUri;
-
-    public AdminList() {
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-
-
     public int getMarktPrice() {
         return marktPrice;
     }
@@ -54,6 +39,22 @@ public class AdminList implements Serializable {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public String getId() {
+        return id;
+    }
+    String imgUri;
+
+    public AdminList() {
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+
+
 
     public AdminList(String name, int price, String qty, String availiable, String category, int marktPrice) {
         Name = name;

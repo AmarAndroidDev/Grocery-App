@@ -88,7 +88,7 @@ public class MixVegPriceDetails extends RecyclerView.Adapter<MixVegPriceDetails.
                 holder.addToCart.setVisibility(View.GONE);
                 holder.cartlayout.setVisibility(View.VISIBLE);
 
-                details1.setIdd(list.get(holder.getAdapterPosition()).getId());
+                details1.setId(list.get(holder.getAdapterPosition()).getId());
                 details1.setTotalprice(totalprice);
                 details1.setImgUri(details.getImgUri());
                 details1.setQty(details.getQty());

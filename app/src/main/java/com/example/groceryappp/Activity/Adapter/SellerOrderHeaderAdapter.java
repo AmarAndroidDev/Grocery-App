@@ -96,7 +96,7 @@ holder.totalPrice.setText(header.getTotal());
                     intent.putExtra("uid",list.get(getAdapterPosition()).getUid());
                     intent.putExtra("latitude",list.get(getAdapterPosition()).getLattitude());
                     intent.putExtra("longitude",list.get(getAdapterPosition()).getLongitude());
-                    intent.putExtra("imguri",list.get(getAdapterPosition()).getImgUrl());
+                    intent.putExtra("imguri",list.get(getAdapterPosition()).getImgUri());
                     context.startActivity(intent);
                 }
             });

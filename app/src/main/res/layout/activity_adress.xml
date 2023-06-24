@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+
     tools:context=".Activity.Activity.AdressActivity">
 
     <Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@color/bg2"
+ 
         app:layout_constraintTop_toTopOf="parent">
         <TextView
             android:id="@+id/tit"
@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             android:drawablePadding="10dp"
             android:text="My Adress"
-            android:textColor="@color/white"
+            android:textColor="@color/buttonBg"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,76 +33,20 @@
             android:layout_height="25dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/backarrow"
-            android:backgroundTint="@color/white" />
+            android:backgroundTint="@color/buttonBg" />
     </Toolbar>
-<LinearLayout
-    android:layout_marginTop="10dp"
-    android:id="@+id/currentLoc"
-  android:gravity="center"
-    android:background="@color/lightgreenBg"
-    android:layout_below="@+id/toolbar2"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
 
-    <TextView
-        android:drawablePadding="10dp"
-        android:drawableLeft="@drawable/baseline_gps_fixed_24"
-android:drawableTint="@color/red"
 
 
-        android:id="@+id/curentLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-      android:gravity="center"
+    <RelativeLayout
 
-
-        android:text="Use My Current Location"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-
-
-         />
-</LinearLayout>
-<LinearLayout
-    android:layout_marginTop="10dp"
-    android:gravity="center"
-    android:id="@+id/edtManualy"
-    android:layout_below="@+id/currentLoc"
-    android:layout_width="match_parent"
-    android:background="@color/lightgreenBg"
-    android:layout_height="wrap_content">
-
-
-    <TextView
-
-        android:drawableLeft="@drawable/baseline_edit_24"
-
-
-        android:id="@+id/edit_manualy"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-android:gravity="center"
-
-
-        android:drawablePadding="10dp"
-        android:text="Edit Manualy"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/curentLocation" />
-</LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:backgroundTint="@color/white"
+        android:background="@drawable/green_edittext_bg"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:id="@+id/card"
-        android:layout_below="@+id/edtManualy"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/toolbar2"
+        android:layout_marginTop="50dp"
         app:cardCornerRadius="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -115,25 +59,74 @@ android:paddingTop="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_marginTop="10dp"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+     <TextView
+android:layout_marginStart="30dp"
+         android:layout_marginEnd="30dp"
+        android:background="@drawable/gradiantcenterbg4"
+android:textStyle="bold"
+        android:drawableLeft="@drawable/baseline_gps_fixed_24"
+        android:drawableTint="@color/red"
+        android:id="@+id/curentLocation"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+         android:paddingStart="100dp"
+         android:paddingRight="100dp"
+        android:text="Gps"
+        android:textColor="@color/buttonBg"
+        android:textSize="14sp"
 
 
+        />
+    <TextView
 
+        android:layout_marginTop="15dp"
+android:layout_marginStart="30dp"
+         android:layout_marginEnd="30dp"
+        android:background="@drawable/gradiantcenterbg4"
+android:textStyle="bold"
+        android:drawableLeft="@drawable/baseline_edit_24"
+        android:drawableTint="@color/black"
+        android:id="@+id/edit_manualy"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+         android:paddingStart="70dp"
+         android:paddingRight="70dp"
+        android:text="Edit Manually"
+        android:textColor="@color/buttonBg"
+        android:textSize="14sp"
+
+
+        />
+
+
+</LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/box"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
 
                     android:layout_marginRight="10dp"
                     android:hint="Apartment/House"
-
+app:hintTextColor="@color/buttonBg"
                     app:boxBackgroundMode="outline"
                     app:boxCornerRadiusBottomEnd="15dp"
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusTopEnd="15dp"
                     app:boxCornerRadiusTopStart="15dp"
-                    app:boxStrokeColor="@color/bg2"
+                    app:boxStrokeColor="@color/buttonBg"
                     app:boxStrokeWidth="1dp"
 
                     app:counterMaxLength="20"
@@ -148,7 +141,7 @@ android:paddingTop="10dp"
 
 
                     app:startIconDrawable="@drawable/baseline_house_24"
-                    app:startIconTint="@color/bg2">
+                    app:startIconTint="@color/buttonBg">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/apart_house"
@@ -158,7 +151,7 @@ android:paddingTop="10dp"
 android:enabled="false"
                         android:backgroundTint="@color/white"
                         android:drawablePadding="10dp"
-                        android:drawableTint="@color/black"
+                        android:drawableTint="@color/buttonBg"
                         android:gravity="center_vertical"
 
                         android:inputType="text"
@@ -168,7 +161,7 @@ android:enabled="false"
 
 
                         android:textCursorDrawable="@drawable/edt_cursor_bg"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -185,13 +178,13 @@ android:layout_marginTop="5dp"
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusTopEnd="15dp"
                     app:boxCornerRadiusTopStart="15dp"
-                    app:boxStrokeColor="@color/bg2"
+                    app:boxStrokeColor="@color/buttonBg"
                     app:boxStrokeWidth="1dp"
 
                     app:counterMaxLength="20"
                     app:endIconMode="clear_text"
 
-
+                    app:hintTextColor="@color/buttonBg"
                     app:errorIconDrawable="@drawable/baseline_error_24"
                     app:errorIconTint="@color/merun"
                     app:errorTextColor="@color/merun"
@@ -200,7 +193,7 @@ android:layout_marginTop="5dp"
 
 
                     app:startIconDrawable="@drawable/city2"
-                    app:startIconTint="@color/bg2">
+                    app:startIconTint="@color/buttonBg">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/locality"
@@ -210,7 +203,7 @@ android:layout_marginTop="5dp"
                         android:enabled="false"
                         android:backgroundTint="@color/white"
                         android:drawablePadding="10dp"
-                        android:drawableTint="@color/black"
+                        android:drawableTint="@color/buttonBg"
                         android:gravity="center_vertical"
 
                         android:inputType="text"
@@ -220,7 +213,7 @@ android:layout_marginTop="5dp"
 
 
                         android:textCursorDrawable="@drawable/edt_cursor_bg"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>                <com.google.android.material.textfield.TextInputLayout
 
                     android:layout_width="match_parent"
@@ -235,7 +228,7 @@ android:layout_marginTop="5dp"
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusTopEnd="15dp"
                     app:boxCornerRadiusTopStart="15dp"
-                    app:boxStrokeColor="@color/bg2"
+                    app:boxStrokeColor="@color/buttonBg"
                     app:boxStrokeWidth="1dp"
 
                     app:counterMaxLength="20"
@@ -247,10 +240,10 @@ android:layout_marginTop="5dp"
                     app:errorTextColor="@color/merun"
                     app:helperTextTextColor="@color/merun"
 
-
+            app:hintTextColor="@color/buttonBg"
 
                     app:startIconDrawable="@drawable/city2"
-                    app:startIconTint="@color/bg2">
+                    app:startIconTint="@color/buttonBg">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/landmark"
@@ -260,7 +253,7 @@ android:layout_marginTop="5dp"
                         android:enabled="false"
                         android:backgroundTint="@color/white"
                         android:drawablePadding="10dp"
-                        android:drawableTint="@color/black"
+                        android:drawableTint="@color/buttonBg"
                         android:gravity="center_vertical"
 
                         android:inputType="text"
@@ -270,7 +263,7 @@ android:layout_marginTop="5dp"
 
 
                         android:textCursorDrawable="@drawable/edt_cursor_bg"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -292,7 +285,7 @@ android:layout_marginTop="5dp"
                 app:boxCornerRadiusBottomStart="15dp"
                 app:boxCornerRadiusTopEnd="15dp"
                 app:boxCornerRadiusTopStart="15dp"
-                app:boxStrokeColor="@color/bg2"
+                app:boxStrokeColor="@color/buttonBg"
                 app:boxStrokeWidth="1dp"
 
                 app:counterMaxLength="20"
@@ -305,9 +298,9 @@ android:layout_marginTop="5dp"
                 app:helperTextTextColor="@color/merun"
 
 
-
+                app:hintTextColor="@color/buttonBg"
                 app:startIconDrawable="@drawable/city2"
-                app:startIconTint="@color/bg2">
+                app:startIconTint="@color/buttonBg">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/city"
@@ -317,7 +310,7 @@ android:layout_marginTop="5dp"
                     android:enabled="false"
                     android:backgroundTint="@color/white"
                     android:drawablePadding="10dp"
-                    android:drawableTint="@color/black"
+                    android:drawableTint="@color/buttonBg"
                     android:gravity="center_vertical"
 
                     android:inputType="text"
@@ -327,7 +320,7 @@ android:layout_marginTop="5dp"
 
 
                     android:textCursorDrawable="@drawable/edt_cursor_bg"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/box"
@@ -344,7 +337,7 @@ android:layout_marginTop="5dp"
                 app:boxCornerRadiusBottomStart="15dp"
                 app:boxCornerRadiusTopEnd="15dp"
                 app:boxCornerRadiusTopStart="15dp"
-                app:boxStrokeColor="@color/bg2"
+                app:boxStrokeColor="@color/buttonBg"
                 app:boxStrokeWidth="1dp"
 
                 app:counterMaxLength="20"
@@ -357,9 +350,9 @@ android:layout_marginTop="5dp"
                 app:helperTextTextColor="@color/merun"
 
 
-
+                app:hintTextColor="@color/buttonBg"
                 app:startIconDrawable="@drawable/pincode2"
-                app:startIconTint="@color/bg2">
+                app:startIconTint="@color/buttonBg">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/pin"
@@ -369,7 +362,7 @@ android:layout_marginTop="5dp"
                     android:enabled="false"
                     android:backgroundTint="@color/white"
                     android:drawablePadding="10dp"
-                    android:drawableTint="@color/black"
+                    android:drawableTint="@color/buttonBg"
                     android:gravity="center_vertical"
 
                     android:inputType="textEmailAddress"
@@ -379,11 +372,11 @@ android:layout_marginTop="5dp"
 
 
                     android:textCursorDrawable="@drawable/edt_cursor_bg"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fullAdLayout"
-
+android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -396,7 +389,7 @@ android:layout_marginTop="5dp"
                 app:boxCornerRadiusBottomStart="15dp"
                 app:boxCornerRadiusTopEnd="15dp"
                 app:boxCornerRadiusTopStart="15dp"
-                app:boxStrokeColor="@color/bg2"
+                app:boxStrokeColor="@color/buttonBg"
                 app:boxStrokeWidth="1dp"
 
                 app:counterMaxLength="20"
@@ -409,9 +402,9 @@ android:layout_marginTop="5dp"
                 app:helperTextTextColor="@color/merun"
 
 
-
+                app:hintTextColor="@color/buttonBg"
                 app:startIconDrawable="@drawable/baseline_location_on_24"
-                app:startIconTint="@color/bg2">
+                app:startIconTint="@color/buttonBg">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/full_adress"
@@ -422,7 +415,7 @@ android:layout_marginTop="5dp"
                     android:enabled="false"
                     android:backgroundTint="@color/white"
                     android:drawablePadding="10dp"
-                    android:drawableTint="@color/black"
+                    android:drawableTint="@color/buttonBg"
                     android:gravity="center_vertical"
 
                     android:inputType="textEmailAddress"
@@ -432,34 +425,39 @@ android:layout_marginTop="5dp"
 
 
                     android:textCursorDrawable="@drawable/edt_cursor_bg"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
+    </RelativeLayout>
 
 
 
 
     <androidx.appcompat.widget.AppCompatButton
+        android:layout_centerHorizontal="true"
+
         android:layout_below="@+id/card"
+
+        android:layout_marginTop="20dp"
         android:id="@+id/btn_adress_update"
         android:layout_width="wrap_content"
-        android:paddingStart="50dp"
-        android:paddingEnd="50dp"
-        android:layout_height="40dp"
-       android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/btn_bg"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:background="@drawable/button_bg"
+        android:backgroundTint="@color/buttonBg"
+        android:drawableStart="@drawable/baseline_update_24"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/white"
         android:gravity="center"
+        android:paddingLeft="30dp"
+        android:textAllCaps="false"
+        android:paddingRight="30dp"
         android:text="Update"
-        android:textSize="16sp"
         android:textColor="@color/white"
+        android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-/>
+ />
+
 </RelativeLayout>

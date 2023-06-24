@@ -6,8 +6,34 @@ import java.io.Serializable;
 
 public class SingleProductDetails implements Serializable {
     @Exclude String id;
-    String name,type,totalprice,imgUri,desc,availiable,qty;
-    int marktPrice,price;
+    String name,type,imgUri,desc,availiable,qty;
+    int marktPrice,price,unit,totalprice;
+
+    public int getTotalprice() {
+        return totalprice;
+    }
+
+    public void setTotalprice(int totalprice) {
+        this.totalprice = totalprice;
+    }
+
+    public int getUnit() {
+        return unit;
+    }
+
+    public void setUnit(int unit) {
+        this.unit = unit;
+    }
+
+    public SingleProductDetails(String name, String imgUri, String qty, int price, int marktPrice, String id) {
+        this.name=name;
+        this.imgUri=imgUri;
+        this.qty=qty;
+        this.price=price;
+        this.marktPrice=marktPrice;
+        this.id=id;
+
+    }
 
     public String getQty() {
         return qty;
@@ -78,20 +104,8 @@ public class SingleProductDetails implements Serializable {
     }
 
 
-    public String getTotalprice() {
-        return totalprice;
-    }
 
-    public void setTotalprice(String totalprice) {
-        this.totalprice = totalprice;
-    }
 
-    public SingleProductDetails(String name, String qty, int price, String totalprice) {
-        this.name = name;
-        this.qty = qty;
-        this.price = price;
-        this.totalprice = totalprice;
-    }
 
 
 

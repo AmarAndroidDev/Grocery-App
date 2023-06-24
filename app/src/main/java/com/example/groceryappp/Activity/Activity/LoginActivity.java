@@ -1,46 +1,33 @@
 package com.example.groceryappp.Activity.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.groceryappp.Activity.AllModel.SaveInfo;
-import com.example.groceryappp.Activity.HomeActivity;
 import com.example.groceryappp.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 private TextView forgotPasword,adminLogin,signUp;
-private EditText email,password;
+private TextInputEditText email,password;
 FirebaseFirestore database;
-private AppCompatButton login;
+private MaterialButton login;
 private ProgressDialog dialog;
 private FirebaseAuth auth;
     String type;
@@ -71,19 +58,20 @@ private FirebaseAuth auth;
                 startActivity(intent);
             }
         });
+
 login.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         loginProcess();
     }
 });
-        adminLogin.setOnClickListener(new View.OnClickListener() {
+      /*  adminLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(new Intent(LoginActivity.this,AdminSignUpActivity.class)));
 
             }
-        });
+        });*/
     }
 
 
@@ -91,18 +79,33 @@ login.setOnClickListener(new View.OnClickListener() {
     private void loginProcess() {
 
         dialog.show();
-        if( password.getText().toString().trim().isEmpty()&& email.getText().toString().trim().isEmpty()) {
+        if( email.getText().toString().trim().isEmpty()) {
             dialog.dismiss();
-            Toast.makeText(LoginActivity.this, "Please Provide All Details", Toast.LENGTH_SHORT).show();
+            email.requestFocus();
+            email.setError("Email is Required");
+
             return;
-        }
+        }else
+            email.setError(null);
         if (!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
             dialog.dismiss();
             email.requestFocus();
-            Toast.makeText(LoginActivity.this, "Incorrect email address", Toast.LENGTH_SHORT).show();
-       return;
+            email.setError("Incorrect email address");
+
+            return;
         }
-        else {
+        if( password.getText().toString().trim().isEmpty()) {
+            dialog.dismiss();
+            password.requestFocus();
+            password.setError("Password is Required");
+
+
+            return;
+        }else password.setError(null);
+
+
+
+
             auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
@@ -119,20 +122,20 @@ login.setOnClickListener(new View.OnClickListener() {
 
 
 
-    }
+
 
     private void checkUserType() {
-        //if usertype is user then send to the usermainactivity,if seller then seller activityt
+        //if usertype is user then send to the usermainactivity,if seller then seller activity
         database.collection("CurrentUser").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-               String type= String.valueOf(documentSnapshot.get("acounttype"));
+               String type= String.valueOf(documentSnapshot.get("accountType"));
                 if (type.equals("Seller")){
                     dialog.dismiss();
                     startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
                     finish();
                 }
-                if (type.equals("user") ){
+                if (type.equals("User") ){
                     dialog.dismiss();
                     startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                     finish();

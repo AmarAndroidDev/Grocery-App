@@ -4,9 +4,11 @@
     >
 
     <gradient android:centerColor="@color/bg2"
-        android:endColor="@color/fedblack"
-        android:startColor="@color/fedblack"
+        android:endColor="@color/darkGreen"
+
+        android:startColor="@color/buttonBg"
         android:type="linear"
-        android:angle="60"
+android:angle="60"
         />
+
 </shape>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.groceryappp.Activity.Activity.ViewAllActivity;
 import com.example.groceryappp.Activity.AllModel.Headline;
 import com.example.groceryappp.R;
@@ -48,8 +49,9 @@ public class HeadLineCircular extends RecyclerView.Adapter<HeadLineCircular.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         holder.title.setText(list.get(position).getTitle());
-        holder.profile.setImageResource(list.get(position).getImg());
+        Glide.with(context).load(list.get(position).getImg()).into(holder.profile);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

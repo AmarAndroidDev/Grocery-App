@@ -50,4 +50,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.jpardogo.googleprogressbar:library:1.2.0'
     implementation("com.tbuonomo:dotsindicator:4.3")
+    implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'
 }

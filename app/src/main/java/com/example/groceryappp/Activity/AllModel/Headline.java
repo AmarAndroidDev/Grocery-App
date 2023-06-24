@@ -1,16 +1,29 @@
 package com.example.groceryappp.Activity.AllModel;
 
 public class Headline {
-    int img;
+    String img;
     String  title,category;
 
-    public Headline(String title, String category) {
+    public Headline(String title, String category,String img) {
         this.title = title;
         this.category = category;
+        this.img = img;
     }
 
-    public int getImg() {
+    public String getImg() {
         return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getcategory() {
@@ -24,9 +37,7 @@ public class Headline {
     public Headline() {
     }
 
-    public void setImg(int img) {
-        this.img = img;
-    }
+
 
     public String getTitle() {
         return title;
@@ -36,10 +47,7 @@ public class Headline {
         this.title = title;
     }
 
-    public Headline(int img, String title) {
-        this.img = img;
-        this.title = title;
-    }
+
 
     public class Alldetails{
         int img;

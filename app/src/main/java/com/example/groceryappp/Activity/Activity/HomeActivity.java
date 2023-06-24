@@ -1,62 +1,54 @@
-package com.example.groceryappp.Activity;
+package com.example.groceryappp.Activity.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
-import com.example.groceryappp.Activity.Activity.AdminHomeActivity;
-import com.example.groceryappp.Activity.Activity.CartActivity;
-import com.example.groceryappp.Activity.Activity.LoginActivity;
-import com.example.groceryappp.Activity.Activity.ProfileActivity;
-import com.example.groceryappp.Activity.Activity.SearchActivity;
+import com.bumptech.glide.Glide;
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.groceryappp.Activity.Adapter.HeadLineCircular;
 import com.example.groceryappp.Activity.Adapter.MixVegPriceDetails;
 import com.example.groceryappp.Activity.AllModel.Headline;
 import com.example.groceryappp.Activity.AllModel.SingleProductDetails;
 import com.example.groceryappp.Activity.Fragment.CartFragment;
+import com.example.groceryappp.Activity.Fragment.ProfileFragment;
 import com.example.groceryappp.Activity.Fragment.UserHomeFragment;
 import com.example.groceryappp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.jpardogo.android.googleprogressbar.library.GoogleProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class HomeActivity extends AppCompatActivity {
 
-    ImageView edtProfile;
-ImageView cart;
+    CircleImageView edtProfile;
+
 Dialog dialog;
 ProgressDialog progressDialog;
 Toolbar toolbar;
+ImageView profilePic;
+AppCompatEditText search;
 
     private RecyclerView vegHeadline, allvegDeatails;
     private ArrayList<Headline> list;
@@ -70,29 +62,126 @@ Toolbar toolbar;
     private List<DocumentSnapshot> listSize;
     private HeadLineCircular adapter;
     private CardView cartsize;
-    private TextView search;
-    private TextView size,deliveryadress;
 
+    private TextView size,deliveryadress;
+    private MeowBottomNavigation bottomNavigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
-        database=FirebaseFirestore.getInstance();
-        auth=FirebaseAuth.getInstance();
-        viewInitilize();
-//////////////////////////////////pending if net off then creashing//////////////////////////////
+        viewInitialize();
+database=FirebaseFirestore.getInstance();
+auth=FirebaseAuth.getInstance();
+bottomNavigation=findViewById(R.id.bottomNavigation);
+        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.root_layout,new UserHomeFragment()).commit();
+        ;
 
+        final  String FCM_TOPIC="PUSH_NOTIFICATIONS";
+/////subscribr fcm topic
+        FirebaseMessaging.getInstance().subscribeToTopic(FCM_TOPIC).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this, ViewAllActivity.class));
+            }
+        });
 ////fetching adress details
         database.collection("CurrentUser").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-               String city= String.valueOf(documentSnapshot.get("city"));
-               String pin= String.valueOf(documentSnapshot.get("pincode"));
-               deliveryadress.setText(city+","+pin);
+                String city= String.valueOf(documentSnapshot.get("city"));
+                String pin= String.valueOf(documentSnapshot.get("pincode"));
+                deliveryadress.setText(city+","+pin);
+                String profile= (String) documentSnapshot.get("profilePic");
+                Glide.with(HomeActivity.this).load(profile).into(profilePic);
+
 
             }
         });
+
+        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.profilee));
+        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.baseline_house_24));
+        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.baseline_shopping_cart_checkout_24));
+        bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
+            @Override
+            public void onClickItem(MeowBottomNavigation.Model item) {
+                // your codes
+                switch (item.getId()){
+                    case 1:
+                        Bundle bundle = new Bundle();
+                        bundle.putString("USER_TYPE", "USER");
+                        ProfileFragment fragment = new ProfileFragment();
+                        fragment.setArguments(bundle);
+                        FragmentTransaction transaction3=getSupportFragmentManager().beginTransaction();
+                        transaction3.replace(R.id.cart_layout,fragment).commit();
+                        findViewById(R.id.cart).setVisibility(View.VISIBLE);
+                        findViewById(R.id.toolbar).setVisibility(View.GONE);
+                        break;
+
+
+                        case 2:
+                            FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.root_layout,new UserHomeFragment()).commit();
+                            findViewById(R.id.cart).setVisibility(View.GONE);
+                            findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
+
+                        break;
+                        case 3:
+
+                            FragmentTransaction transaction2=getSupportFragmentManager().beginTransaction();
+                            transaction2.replace(R.id.cart_layout,new CartFragment()).commit();
+                            findViewById(R.id.cart).setVisibility(View.VISIBLE);
+                            findViewById(R.id.toolbar).setVisibility(View.GONE);
+                        break;
+                }
+            }
+        });
+
+        bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
+            @Override
+            public void onShowItem(MeowBottomNavigation.Model item) {
+             switch (item.getId()){
+                 case 1:
+                     break;
+                     case 2:
+                     break;
+                     case 3:
+                     break;
+             }
+            }
+        });
+        bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
+            @Override
+            public void onReselectItem(MeowBottomNavigation.Model item) {
+                // your codes
+            }
+        });
+    }
+
+    private void viewInitialize() {
+        deliveryadress=findViewById(R.id.deliveryAd);
+        edtProfile=findViewById(R.id.edit_profile);
+        profilePic=findViewById(R.id.profile_pic);
+        search=findViewById(R.id.search);
+    }
+     /*   database=FirebaseFirestore.getInstance();
+        auth=FirebaseAuth.getInstance();
+        viewInitilize();
+//////////////////////////////////pending if net off then creashing//////////////////////////////
+
+
 
         final  String FCM_TOPIC="PUSH_NOTIFICATIONS";
 /////subscribr fcm topic
@@ -131,16 +220,16 @@ cart.setOnClickListener(new View.OnClickListener() {
     public void onClick(View view) {
         loadProgressBar();
         startActivity(new Intent(HomeActivity.this, CartActivity.class));
-       /* toolbar.setVisibility(View.GONE);
+       *//* toolbar.setVisibility(View.GONE);
         findViewById(R.id.root_layout).setVisibility(View.GONE);
         findViewById(R.id.root_layout_cart).setVisibility(View.VISIBLE);
         FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.root_layout_cart,new CartFragment()).commit();*/
+        transaction.replace(R.id.root_layout_cart,new CartFragment()).commit();*//*
 dialog.dismiss();
 
 
     }
-});/*shop.setOnClickListener(new View.OnClickListener() {
+});*//*shop.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         toolbar.setVisibility(View.VISIBLE);
@@ -149,11 +238,11 @@ dialog.dismiss();
         FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.root_layout,new UserHomeFragment()).commit();
     }
-});*/
+});*//*
 
 
-     /*   cartsize=findViewById(R.id.cartSize);
-        size=findViewById(R.id.size);*/
+     *//*   cartsize=findViewById(R.id.cartSize);
+        size=findViewById(R.id.size);*//*
         String[] title = new String[]{"Home", "Cart", "Order", "Profile"};
         ///fetching size
         database.collection("CurrentUser").document(auth.getCurrentUser().getUid()).collection("cart").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -204,15 +293,15 @@ dialog.dismiss();
             }
         }, new IntentFilter("CartSizeMinus"));
 
-      /*  pager2.setAdapter(new UserHomeFragmentAdapter(this));
+      *//*  pager2.setAdapter(new UserHomeFragmentAdapter(this));
         new TabLayoutMediator(tableLayout, pager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-               *//* int[] icon= new int[]{R.drawable.apple2,R.drawable.apple2,R.drawable.apple2,R.drawable.apple2,R.drawable.apple2};
+               *//**//* int[] icon= new int[]{R.drawable.apple2,R.drawable.apple2,R.drawable.apple2,R.drawable.apple2,R.drawable.apple2};
 
                 tab.setText(title[position]);
 
-                tab.setIcon(icon[0]);*//*
+                tab.setIcon(icon[0]);*//**//*
 
                 switch (position) {
                     case 0:
@@ -223,17 +312,17 @@ dialog.dismiss();
                         tab.setText("Cart");
                         //tab.setIcon(R.drawable.cart);
                         break;
-                   *//* case 2:
+                   *//**//* case 2:
                         tab.setText("Profile");
                         //tab.setIcon(R.drawable.profilee);
-                        break;*//*
+                        break;*//**//*
                     case 2:
                         tab.setText("Order");
                         //tab.setIcon(R.drawable.orders);
 
                 }
             }
-        }).attach();*/
+        }).attach();*//*
 
 
     }
@@ -259,6 +348,6 @@ finish();
         toolbar=findViewById(R.id.tool);
         edtProfile=findViewById(R.id.edit_profile);
         deliveryadress=findViewById(R.id.addelivery);
-    }
+    }*/
 
 }

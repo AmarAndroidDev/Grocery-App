@@ -33,7 +33,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EditProfileActivity extends AppCompatActivity {
 private SwitchCompat switchPasword;
 LinearLayout paswordLayout;
-LinearLayout updateProfile;
+AppCompatButton updateProfile;
 private FirebaseFirestore database;
 private FirebaseAuth auth;
 private ImageView back;
@@ -78,10 +78,11 @@ private ImageView back;
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             Intent intent=new Intent(new Intent(EditProfileActivity.this,ProfileActivity.class));
+                onBackPressed();
+            /* Intent intent=new Intent(new Intent(EditProfileActivity.this,ProfileActivity.class));
                 intent.putExtra("userType",userType);
              startActivity(intent);
-             finish();
+             finish();*/
             }
         });
 
@@ -163,9 +164,10 @@ back=findViewById(R.id.back);
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(new Intent(EditProfileActivity.this,ProfileActivity.class));
+        super.onBackPressed();
+       /* Intent intent=new Intent(new Intent(EditProfileActivity.this,ProfileActivity.class));
         intent.putExtra("userType",userType);
         startActivity(intent);
-        finish();
+        finish();*/
     }
 }

@@ -16,7 +16,7 @@
 <LinearLayout
 
     android:layout_marginLeft="5dp"
-    android:background="@drawable/greenroundbg"
+   android:background="@drawable/greenroundbg"
     android:orientation="horizontal"
 android:paddingStart="8dp"
     android:paddingEnd="13dp"
@@ -26,8 +26,8 @@ android:paddingStart="8dp"
     >
     <TextView
         android:layout_marginLeft="8dp"
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,12 +37,12 @@ android:paddingStart="8dp"
         android:maxLines="1"
         android:text=""
         android:textColor="@color/white"
-        android:textSize="15dp"
+        android:textSize="14sp"
 
         />
     <TextView
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
         android:id="@+id/total_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@ android:paddingStart="8dp"
         android:maxLines="1"
         android:text=""
         android:textColor="@color/white"
-        android:textSize="15dp"
+        android:textSize="14sp"
 
         />
 
@@ -85,7 +85,7 @@ android:layout_marginLeft="5dp"
 
                 android:text="Order Id : "
                 android:textColor="@color/merun"
-                android:textSize="15sp"
+                android:textSize="14sp"
 
                 />
             <TextView
@@ -98,7 +98,7 @@ android:layout_marginLeft="5dp"
 
                 android:text=" "
                 android:textColor="@color/merun"
-                android:textSize="15sp"
+                android:textSize="14sp"
 
                 />
 
@@ -116,9 +116,9 @@ android:layout_marginLeft="5dp"
 
                 android:gravity="start"
                 android:maxLines="1"
-                android:text="Customer Name : "
+                android:text="Name : "
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="14sp"
 
 
                 />
@@ -134,7 +134,7 @@ android:layout_marginLeft="5dp"
                 android:maxLines="1"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="14sp"
 
                 />
 
@@ -149,7 +149,7 @@ android:layout_marginLeft="5dp"
                 android:maxLines="1"
                 android:text="Ph No : "
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="14sp"
 
 
                 />
@@ -163,13 +163,15 @@ android:layout_marginLeft="5dp"
                 android:maxLines="1"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="14sp"
 
                 />
 
         </TableRow>
     </TableLayout>
     <TextView
+        android:layout_marginBottom="2dp"
+        android:textSize="14sp"
         android:id="@+id/viewallitem"
         android:drawableRight="@drawable/arroeforeward"
         android:layout_marginRight="10dp"
@@ -183,11 +185,11 @@ android:layout_marginLeft="5dp"
     <LinearLayout
         android:gravity="center"
 
-        android:layout_marginTop="5dp"
+
         android:background="@drawable/bg222"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="22dp">
         <LinearLayout
 
 
@@ -195,7 +197,7 @@ android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:paddingTop="3dp"
+
                 android:paddingBottom="3dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="10dp"
@@ -205,13 +207,13 @@ android:layout_marginLeft="5dp"
                 android:maxLines="1"
                 android:text="Order Status : "
                 android:textColor="@color/white"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:textStyle="italic"
 
                 />
 
             <TextView
-                android:paddingTop="3dp"
+
                 android:paddingBottom="3dp"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/orderstatus"
@@ -222,7 +224,7 @@ android:layout_marginLeft="5dp"
 
                 android:text=""
                 android:textColor="@color/white"
-                android:textSize="15dp"
+                android:textSize="14sp"
 
                 />
         </LinearLayout>

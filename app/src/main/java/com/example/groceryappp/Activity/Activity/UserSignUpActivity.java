@@ -2,6 +2,7 @@ package com.example.groceryappp.Activity.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
@@ -10,8 +11,10 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -20,22 +23,17 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.groceryappp.Activity.AllModel.AdressModel;
-import com.example.groceryappp.Activity.AllModel.ModelRegister;
 import com.example.groceryappp.Activity.AllModel.UserInfo;
-import com.example.groceryappp.Activity.HomeActivity;
 import com.example.groceryappp.R;
-import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,18 +41,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -89,6 +83,7 @@ public class UserSignUpActivity extends AppCompatActivity implements LocationLis
         auth = FirebaseAuth.getInstance();
 
         viewInitialize();
+
         ///permission for location
         loocationPermission = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
         register.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +91,11 @@ public class UserSignUpActivity extends AppCompatActivity implements LocationLis
             public void onClick(View view) {
               boolean result= validate();
             if (result){
+                dialog = new ProgressDialog(UserSignUpActivity.this);
+                dialog.setTitle("Creating Account");
+                dialog.setMessage("Please Wait...");
+                dialog.setCancelable(false);
+                dialog.show();
                 registerUser();
             }else {
                 return;
@@ -138,9 +138,7 @@ back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog2 = new ProgressDialog(UserSignUpActivity.this);
-                dialog2.setIcon(R.drawable.baseline_location_on_24);
-                dialog2.setTitle("Fetching Location");
-                dialog2.setMessage("Please Wait...");
+                dialog2.setMessage("Fetching Location...");
                 dialog2.setCancelable(false);
                 dialog2.show();
                 if (checkLocationPermission()) {
@@ -156,12 +154,38 @@ back.setOnClickListener(new View.OnClickListener() {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, 8);
+                if (ContextCompat.checkSelfPermission(UserSignUpActivity.this, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(UserSignUpActivity.this,new String[]{Manifest.permission.CAMERA},1);
+                }else {
+                    showOptionDialog();
+                }
+
+
             }
         });
+
+    }
+
+    private void showOptionDialog() {
+        AlertDialog.Builder alert=new AlertDialog.Builder(UserSignUpActivity.this);
+       String item[]={"Camera","Gallery"};
+        alert.setItems(item, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+if (item[i].equals("Camera")){
+    Intent intent = new Intent();
+    intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+    startActivityForResult(intent, 9);
+
+}else {
+     Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, 8);
+}
+            }
+        }).show();
 
     }
 
@@ -209,98 +233,96 @@ back.setOnClickListener(new View.OnClickListener() {
     }
 
     private boolean validate() {
-        dialog = new ProgressDialog(this);
-        dialog.setTitle("Creating Account");
-        dialog.setMessage("Please Wait...");
-        dialog.setCancelable(false);
-        dialog.show();
+
         if (name.getText().toString().trim().isEmpty()){
-            dialog.dismiss();
-            Toast.makeText(UserSignUpActivity.this, "Please Provide Full name", Toast.LENGTH_SHORT).show();
-            return false;
-        } if (number.getText().toString().trim().isEmpty() ){
-            dialog.dismiss();
-            Toast.makeText(UserSignUpActivity.this, "Please Provide Number", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if(email.getText().toString().trim().isEmpty()) {
-            dialog.dismiss();
-            Toast.makeText(UserSignUpActivity.this, "Please Provide Email Id", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (password.getText().toString().trim().isEmpty()){
-            dialog.dismiss();
-            Toast.makeText(UserSignUpActivity.this, "Please set Password", Toast.LENGTH_SHORT).show();
-            return false;
-        } if (confirmPasd.getText().toString().trim().isEmpty() ) {
-            dialog.dismiss();
-            Toast.makeText(UserSignUpActivity.this, "Please give Confirm Password", Toast.LENGTH_SHORT).show();
-            return false;
-        }
 
-  if (apartment.getText().toString().trim().isEmpty()){
-            dialog.dismiss();
-            Toast.makeText(UserSignUpActivity.this, "Please Provide Apartment/House  Name", Toast.LENGTH_SHORT).show();
+            name.setError("Name is required");
+
             return false;
-        } if (locality.getText().toString().trim().isEmpty() ){
-            dialog.dismiss();
-            Toast.makeText(UserSignUpActivity.this, "Please Provide Locality/Street", Toast.LENGTH_SHORT).show();
+        }  if (name.getText().toString().trim().length() < 4 && name.getText().toString().trim().length() > 16) {
+
+            name.requestFocus();
+            name.setError("Name should max 16 digit");
             return false;
         }
-        if(street.getText().toString().trim().isEmpty()) {
-            dialog.dismiss();
-            Toast.makeText(UserSignUpActivity.this, "Please Provide Street", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (city.getText().toString().trim().isEmpty()){
-            dialog.dismiss();
-            Toast.makeText(UserSignUpActivity.this, "Please  Provide City", Toast.LENGTH_SHORT).show();
-            return false;
-        } if (pin.getText().toString().trim().isEmpty() ) {
-            dialog.dismiss();
-            Toast.makeText(UserSignUpActivity.this, "Please Provide PinCode", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+        if (number.getText().toString().trim().isEmpty() ){
 
+            number.setError("Number is required");
 
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString().trim()).matches()) {
-            dialog.dismiss();
-            email.requestFocus();
-            Toast.makeText(UserSignUpActivity.this, "Incorrect email address", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (number.getText().toString().trim().length() != 10) {
-            dialog.dismiss();
+
             number.requestFocus();
-            Toast.makeText(UserSignUpActivity.this, " Number should be 10 digit ", Toast.LENGTH_SHORT).show();
+            number.setError("Number should be 10 digit");
             return false;
         }
-        if (name.getText().toString().trim().length() < 4 && name.getText().toString().trim().length() > 16) {
-            dialog.dismiss();
-            name.requestFocus();
-            Toast.makeText(UserSignUpActivity.this, " Name should be 16 digit ", Toast.LENGTH_SHORT).show();
+        if(email.getText().toString().trim().isEmpty()) {
+
+            email.setError("Email is required");
+            return false;
+        }
+        if (password.getText().toString().trim().isEmpty()){
+
+            password.setError("Password is required");
+            return false;
+        } if (confirmPasd.getText().toString().trim().isEmpty() ) {
+
+            confirmPasd.setError("Confirm Password is required");
             return false;
         }
 
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString().trim()).matches()) {
+
+            email.requestFocus();
+            email.setError("Incorrect email address");
+            return false;
+        }
+
+
         if (password.getText().toString().trim().length() < 4 && password.getText().toString().trim().length() > 10) {
-            dialog.dismiss();
+
             password.requestFocus();
-            Toast.makeText(UserSignUpActivity.this, " password should be 4 to 10 digit ", Toast.LENGTH_SHORT).show();
+            password.setError("Password should be 4-10 digit");
             return false;
         }
 
         if (!password.getText().toString().trim().equals(confirmPasd.getText().toString().trim())) {
-            dialog.dismiss();
-            Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show();
+
+            confirmPasd.setError("Password is not matching");
 
             return false;
         }
-        if (confirmPasd.getText().toString().trim().isEmpty()){
-            dialog.dismiss();
-            Toast.makeText(this, "Type Confirm Password", Toast.LENGTH_SHORT).show();
+
+  if (apartment.getText().toString().trim().isEmpty()){
+
+      apartment.setError("Apartment/House is required");
             return false;
         }
+        if(street.getText().toString().trim().isEmpty()) {
+
+            street.setError("Street is required");
+            return false;
+        }
+        if (locality.getText().toString().trim().isEmpty() ){
+
+            locality.setError("Locality is required");
+            return false;
+        }
+        if (city.getText().toString().trim().isEmpty()){
+
+            city.setError("City is required");
+            return false;
+        } if (pin.getText().toString().trim().isEmpty() ) {
+
+            pin.setError("PinCode is required");
+            return false;
+        }
+
+
+
+
         return true;
 
 
@@ -355,7 +377,7 @@ back.setOnClickListener(new View.OnClickListener() {
             map.put("latitude", String.valueOf(lattitude));
             map.put("longitude", String.valueOf(longitude));*/
             String fullAd=apartment.getText().toString()+","+locality.getText().toString()+","+street.getText().toString()+","+city.getText().toString()+","+pin.getText().toString();
-            UserInfo userInfo=new UserInfo(auth.getUid(),email,pasword,number,username,"user","",apartment.getText().toString(),city.getText().toString(),locality.getText().toString(),street.getText().toString(),pin.getText().toString(),fullAd);
+            UserInfo userInfo=new UserInfo(auth.getUid(),email,pasword,number,username,"User","",apartment.getText().toString(),city.getText().toString(),locality.getText().toString(),street.getText().toString(),pin.getText().toString(),fullAd,""+lattitude,""+longitude);
             database.collection("CurrentUser").document(auth.getUid()).set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
@@ -402,7 +424,7 @@ back.setOnClickListener(new View.OnClickListener() {
                         map.put("pincode", "" + Pin);
                         map.put("street", "" + Locality);*/
                         String fullAd=apartment.getText().toString()+","+street.getText().toString()+","+locality.getText().toString()+","+city.getText().toString()+","+pin.getText().toString();
-                        UserInfo userInfo=new UserInfo(auth.getUid(),email,pasword,number,username,"user",""+downloadUri,apartment.getText().toString(),city.getText().toString(),locality.getText().toString(),street.getText().toString(),pin.getText().toString(),fullAd);
+                        UserInfo userInfo=new UserInfo(auth.getUid(),email,pasword,number,username,"user",""+downloadUri,apartment.getText().toString(),city.getText().toString(),locality.getText().toString(),street.getText().toString(),pin.getText().toString(),fullAd,""+lattitude,""+longitude);
                         database.collection("CurrentUser").document(auth.getUid()).set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
@@ -478,18 +500,28 @@ back.setOnClickListener(new View.OnClickListener() {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 8 && !(data.getData() == null)) {
+        if (requestCode == 8 && !(data.getData() != null )) {
             imageUri = data.getData();
             profile.setImageURI(imageUri);
+
+        }else {
+
+        } if (requestCode == 9 && !(data.getData() != null )) {
+           Bitmap bitmap= (Bitmap) data.getExtras().get("data");
+           profile.setImageBitmap(bitmap);
+            imageUri = data.getData();
+          //  profile.setImageURI(imageUri);
+
+        }else {
 
         }
     }
     private void viewInitialize() {
         register=findViewById(R.id.btn_Signup);
-        name=findViewById(R.id.name_signUp);
+
         password=findViewById(R.id.pasd_signUp);
         email=findViewById(R.id.email_signUp);
-        number=findViewById(R.id.user_number);
+
         confirmPasd = findViewById(R.id.confirm_pasd_signUp);
 
         profile = findViewById(R.id.profile);

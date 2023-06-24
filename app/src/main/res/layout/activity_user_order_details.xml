@@ -60,7 +60,7 @@ android:layout_centerHorizontal="true"
   <RelativeLayout
       android:layout_marginLeft="10dp"
       android:layout_marginRight="10dp"
-      android:background="#80228C22"
+      android:background="@drawable/gradiant_bg3"
       android:id="@+id/relative"
 android:layout_marginTop="5dp"
       android:layout_width="match_parent"
@@ -75,8 +75,8 @@ android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Order Id :"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
         />
       <TextView
           android:layout_gravity="center_vertical"
@@ -87,8 +87,8 @@ android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
         android:text=""
           android:maxLines="1"
-        android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
 
 
         />
@@ -159,15 +159,15 @@ android:layout_marginTop="5dp"
 
 
             <TextView
-                android:background="#80228C22"
+                android:background="@drawable/gradiant_bg3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:maxLines="1"
 android:paddingStart="5dp"
                 android:text="Shipping Details : "
-                android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
 
                 />
 
@@ -185,7 +185,7 @@ android:paddingStart="5dp"
                 android:maxLines="1"
                 android:text="Customer Name : "
                 android:textColor="@color/fedblack"
-                android:textSize="15sp"
+                android:textSize="14sp"
 
 
                 />
@@ -201,7 +201,7 @@ android:paddingStart="5dp"
                 android:maxLines="1"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textSize="14sp"
 
                 />
 
@@ -216,7 +216,7 @@ android:paddingStart="5dp"
                 android:maxLines="1"
                 android:text="Ph No : "
                 android:textColor="@color/fedblack"
-                android:textSize="15sp"
+                android:textSize="14sp"
 
 
                 />
@@ -230,7 +230,7 @@ android:paddingStart="5dp"
                 android:maxLines="1"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textSize="14sp"
 
                 />
 
@@ -245,7 +245,7 @@ android:paddingStart="5dp"
               android:maxLines="1"
               android:text="Address : "
               android:textColor="@color/fedblack"
-              android:textSize="15sp"
+              android:textSize="14sp"
 
 
               />
@@ -264,7 +264,7 @@ android:paddingStart="5dp"
             android:maxLines="5"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="14sp"
 
             />
 
@@ -302,15 +302,15 @@ android:id="@+id/txt"
         <TextView
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:background="#80228C22"
+            android:background="@drawable/gradiant_bg3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
             android:maxLines="1"
             android:paddingStart="5dp"
             android:text="Other Details : "
-            android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
 
             />
         <TableRow>
@@ -324,7 +324,7 @@ android:id="@+id/txt"
               android:maxLines="1"
               android:text="Date : "
               android:textColor="@color/fedblack"
-              android:textSize="15sp"
+              android:textSize="14sp"
 
 
               />
@@ -339,7 +339,7 @@ android:id="@+id/txt"
               android:maxLines="1"
               android:text=""
               android:textColor="@color/black"
-              android:textSize="15dp"
+              android:textSize="14sp"
 
               />
 
@@ -355,7 +355,7 @@ android:id="@+id/txt"
               android:maxLines="1"
               android:text="Total Amount : "
               android:textColor="@color/fedblack"
-              android:textSize="15sp"
+              android:textSize="14sp"
 
 
               />
@@ -370,7 +370,7 @@ android:id="@+id/txt"
               android:maxLines="1"
               android:text=""
               android:textColor="@color/black"
-              android:textSize="15dp"
+              android:textSize="14sp"
 
               />
 
@@ -390,7 +390,7 @@ android:id="@+id/txt"
           android:layout_height="wrap_content"
           android:text="Payment Mode :"
           android:textColor="@color/fedblack"
-          android:textSize="15sp"
+          android:textSize="14sp"
           />
       <TextView
           android:id="@+id/payment_mode"
@@ -400,7 +400,7 @@ android:id="@+id/txt"
           android:text=""
           android:maxLines="1"
           android:textColor="@color/black"
-          android:textSize="15sp"
+          android:textSize="14sp"
 
 
           />
@@ -418,7 +418,7 @@ android:id="@+id/txt"
           android:layout_height="wrap_content"
           android:text="Order Status:"
           android:textColor="@color/black"
-          android:textSize="15sp"
+          android:textSize="14sp"
           />
       <TextView
          android:id="@+id/orderStatus"
@@ -428,7 +428,7 @@ android:id="@+id/txt"
           android:text=""
           android:maxLines="1"
           android:textColor="@color/black"
-          android:textSize="15sp"
+          android:textSize="14sp"
 
 
           />
@@ -452,18 +452,18 @@ android:id="@+id/txt"
       android:layout_alignParentBottom="true"
       android:id="@+id/cancel"
       android:layout_width="match_parent"
-      android:layout_height="40dp"
+      android:layout_height="35dp"
       android:paddingLeft="15dp"
       android:paddingRight="15dp"
       android:drawablePadding="10dp"
 
       android:layout_centerHorizontal="true"
       android:layout_marginTop="20dp"
-      android:background="#B3FA0213"
+      android:background="@color/red"
 
       android:gravity="center"
       android:text="Cancel Order"
-      android:textSize="18dp"
+      android:textSize="14sp"
       android:textColor="@color/black"
      />
 </RelativeLayout>

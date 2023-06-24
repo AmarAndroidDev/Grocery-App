@@ -48,8 +48,8 @@ public class UserOrderHeaderAdapter extends RecyclerView.Adapter<UserOrderHeader
         // milliseconds to date.
         long data = Long.parseLong(header.getOrderId());
     Date= formatter.format(data);
-        holder.date.setText(Date+" "+"/");
-        holder.totalPrice.setText(String.valueOf(""+header.getTotal()));
+        holder.date.setText(Date+" "+"/" );
+        holder.totalPrice.setText(String.valueOf(" ₹"+header.getTotal()));
         String orderstatus = header.getStatus();
         if (orderstatus.equalsIgnoreCase("Processing")) {
             holder.orderStaus.setText(orderstatus);
@@ -95,8 +95,9 @@ public class UserOrderHeaderAdapter extends RecyclerView.Adapter<UserOrderHeader
                     intent.putExtra("order status",list.get(getAdapterPosition()).getStatus());
                     intent.putExtra("sum",header.getTotal());
                     intent.putExtra("date",Date);
-
+intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
+
 
                 }
             });

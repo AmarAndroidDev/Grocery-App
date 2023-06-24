@@ -5,10 +5,125 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.HomeActivity">
+
+    tools:context=".Activity.Activity.HomeActivity">
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_above="@+id/bottomNavigation"
+android:id="@+id/cart"
+        android:backgroundTint="#FFFF"
+        android:background="@drawable/greenroundbg50radius"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/cart_layout"
+           android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginTop="10dp"
+
+            android:background="@drawable/greenroundbg50radius">
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_above="@+id/bottomNavigation"
+        android:id="@+id/toolbar"
+        android:background="@color/bg2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/demo"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:text="Delivery Here"
+            android:textStyle="italic"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/deliveryAd"
+            android:drawableStart="@drawable/baseline_location_on_24"
+            android:layout_below="@+id/demo"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="2dp"
+            android:text=""
+
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+<de.hdodenhof.circleimageview.CircleImageView
+    android:id="@+id/profile_pic"
+    android:layout_marginTop="10dp"
+    android:layout_alignParentRight="true"
+    android:layout_marginEnd="30dp"
+app:civ_border_width="1.5dp"
+    app:civ_border_color="@color/white"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:background="@drawable/profilee"
+    />
+        <androidx.appcompat.widget.AppCompatEditText
+android:layout_marginTop="10dp"
+            android:editable="false"
+            android:backgroundTint="@color/white"
+            android:layout_below="@+id/deliveryAd"
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+        android:background="@drawable/round_bg"
+            android:drawableLeft="@drawable/baseline_search_24"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+android:paddingStart="10dp"
+            android:hint="Search Item..."
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+        <RelativeLayout
+
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/search"
+android:backgroundTint="#FFFF"
+            android:background="@drawable/greenroundbg50radius"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+
+                android:id="@+id/root_layout"
+android:backgroundTint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/greenroundbg50radius">
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 
-    <Toolbar
+
+   <!-- <Toolbar
 
         android:id="@+id/tool"
         android:layout_width="match_parent"
@@ -186,7 +301,7 @@
         </androidx.cardview.widget.CardView>
 
 
-        <!-- <androidx.cardview.widget.CardView
+        &lt;!&ndash; <androidx.cardview.widget.CardView
              android:id="@+id/cartt"
              android:layout_width="match_parent"
              android:layout_height="35dp"
@@ -222,7 +337,7 @@
 
                  android:textStyle="bold" />
              </RelativeLayout>
-         </androidx.cardview.widget.CardView>-->
+         </androidx.cardview.widget.CardView>&ndash;&gt;
 
 
     </LinearLayout>
@@ -243,7 +358,25 @@
         android:layout_marginTop="55dp"
         android:orientation="horizontal"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />-->
 
+
+    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+android:layout_alignParentBottom="true"
+        android:background="@drawable/profile_setting_green"
+     android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:mbn_backgroundBottomColor="@color/bg2"
+        app:mbn_circleColor="@color/white"
+        app:mbn_countBackgroundColor="@color/red"
+        app:mbn_countTextColor="@color/white"
+        app:mbn_defaultIconColor="@color/white"
+        app:mbn_rippleColor="@color/grey"
+        app:mbn_selectedIconColor="@color/buttonBg"
+        app:mbn_shadowColor="@color/white" />
 
 </RelativeLayout>

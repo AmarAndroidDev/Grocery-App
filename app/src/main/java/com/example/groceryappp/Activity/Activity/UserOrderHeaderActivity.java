@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.example.groceryappp.Activity.Adapter.UserOrderHeaderAdapter;
 import com.example.groceryappp.Activity.AllModel.UserOrderHeader;
-import com.example.groceryappp.Activity.HomeActivity;
+import com.example.groceryappp.Activity.Fragment.ProfileFragment;
 import com.example.groceryappp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,17 +50,17 @@ String orderType;
         fetchingDialog();
 
   viewInitialize();
-       /* String orderid=getIntent().getStringExtra("orderId");
+        String orderid=getIntent().getStringExtra("orderId");
         String buyerId=getIntent().getStringExtra("buyerid");
-        String seller = getIntent().getStringExtra("sellerid");*/
+        String seller = getIntent().getStringExtra("sellerid");
 back.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-Intent intent=new Intent(UserOrderHeaderActivity.this,ProfileActivity.class);
-intent.putExtra("userType","user");
+//Intent intent=new Intent(UserOrderHeaderActivity.this, profileFragment.class);
+/*intent.putExtra("userType","user");
         startActivity(intent);
         finish();
-     /*   if (orderType.equals("setting")){
+        if (orderType.equals("setting")){
 
 
         }
@@ -69,9 +69,11 @@ intent.putExtra("userType","user");
             startActivity(new Intent(UserOrderHeaderActivity.this,HomeActivity.class));
             finish();
         }*/
+      onBackPressed();
 
     }
 });
+
 database=FirebaseFirestore.getInstance();
 auth=FirebaseAuth.getInstance();
         String orderId=getIntent().getStringExtra("orderId");//timstamp
@@ -91,22 +93,32 @@ auth=FirebaseAuth.getInstance();
                     list.add(header);
                     if (list.size()!=0){
                         emptyCart.setVisibility(View.GONE);
+                    }else {
+                        emptyCart.setVisibility(View.VISIBLE);
                     }
                 }
                 adapter.notifyDataSetChanged();
                 dialog.dismiss();
             }
         });
-
+        if (list.size()!=0){
+            emptyCart.setVisibility(View.GONE);
+        }else {
+            emptyCart.setVisibility(View.VISIBLE);
+        }
     }
 
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(UserOrderHeaderActivity.this,ProfileActivity.class);
-        intent.putExtra("userType","user");
+       /* Intent intent=new Intent(UserOrderHeaderActivity.this, ProfileFragment.class);
+
+       intent.putExtra("USER_TYPE","user");
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        finish();
+*/
+        super.onBackPressed();
+
     }
 
     private void viewInitialize() {

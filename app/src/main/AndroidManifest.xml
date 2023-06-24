@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.groceryappp">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -16,9 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryAppp"
         tools:targetApi="31">
-        <activity
-            android:name=".Activity.Activity.CartActivity"
-            android:exported="false" />
         <activity
             android:name=".Activity.Activity.SearchActivity"
             android:exported="false" />
@@ -68,14 +68,8 @@
             android:name=".Activity.Activity.AdminSignUpActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.Activity.AdminLoginActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.Activity.UserSignUpActivity"
             android:exported="true" />
-        <activity
-            android:name=".Activity.Activity.ProfileActivity"
-            android:exported="false" />
         <activity
             android:name=".Activity.Activity.UserOrderHeaderActivity"
             android:exported="true" />
@@ -89,7 +83,7 @@
             android:name=".Activity.Activity.AdminHomeActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.HomeActivity"
+            android:name=".Activity.Activity.HomeActivity"
             android:exported="true" />
 
         <service

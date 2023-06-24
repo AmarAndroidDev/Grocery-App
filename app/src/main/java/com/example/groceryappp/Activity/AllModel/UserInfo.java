@@ -1,9 +1,27 @@
 package com.example.groceryappp.Activity.AllModel;
 
 public class UserInfo {
-    String uid,email,password,number,name,accountType,profilePic,apartment,city,locality,landmark,pincode,fullAd;
+    String uid,email,password,number,name,accountType,profilePic,apartment,city,locality,landmark,pincode,fullAd,latitude,longitude;
 
-    public UserInfo(String uid, String email, String password, String number, String name, String accountType, String profilePic, String apartment, String city, String locality, String landmark, String pincode,String fullAd) {
+
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public UserInfo(String uid, String email, String password, String number, String name, String accountType, String profilePic, String apartment, String city, String locality, String landmark, String pincode, String fullAd, String latitude, String longitude) {
         this.uid = uid;
         this.email = email;
         this.password = password;
@@ -17,7 +35,8 @@ public class UserInfo {
         this.landmark = landmark;
         this.pincode = pincode;
         this.fullAd = fullAd;
-
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getFullAd() {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradiant_background"
+
     tools:context=".Activity.Activity.EditProfileActivity">
 <RelativeLayout
     android:id="@+id/relay1"
@@ -18,7 +18,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/backarrow"
-        android:backgroundTint="@color/white" />
+        android:backgroundTint="@color/buttonBg" />
 
     <TextView
         android:layout_centerHorizontal="true"
@@ -27,7 +27,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:text="My Profile"
-        android:textColor="@color/white"
+        android:textColor="@color/buttonBg"
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -46,221 +46,199 @@ android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-<androidx.cardview.widget.CardView
+        <RelativeLayout
 
-    app:cardCornerRadius="20dp"
-    android:layout_margin="20dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-
-        <LinearLayout
-
-            android:id="@+id/linearLayout3"
+android:background="@drawable/green_edittext_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-
-
-            android:backgroundTint="@color/white"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="20dp">
 
 
             <LinearLayout
+
+                android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
 
-                android:orientation="vertical">
+                android:backgroundTint="@color/white"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
 
                 <LinearLayout
-
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="5dp"
+
                     android:orientation="vertical">
 
+                    <LinearLayout
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/profile"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/profilee"
-                        android:backgroundTint="@color/black"
-                        app:civ_border_color="@color/black"
-                        app:civ_border_width="2dp" />
-
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="vertical">
+
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/profile"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/profilee"
+                            android:backgroundTint="@color/buttonBg"
+                            app:civ_border_color="@color/buttonBg"
+                            app:civ_border_width="2dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="My Profile"
+                            android:textColor="@color/buttonBg"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/box"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:hint="User Name"
+
+                        app:boxBackgroundColor="@color/white"
+
+                        app:boxBackgroundMode="outline"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeColor="@color/buttonBg"
+                        app:boxStrokeWidth="1dp"
+
+
+                        app:endIconMode="clear_text"
+                        app:endIconTint="@color/buttonBg"
+                        app:hintEnabled="true"
+                        app:hintTextColor="@color/buttonBg"
+
+
+                        app:placeholderText="xyz"
+                        app:startIconDrawable="@drawable/profilee"
+                        app:startIconTint="@color/buttonBg">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ed_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+
+
+                            android:gravity="center_vertical"
+                            android:inputType="textWebEmailAddress"
+
+                            android:maxLength="20"
+                            android:textColor="@color/black"
+
+                            android:textColorHint="@color/buttonBg"
+
+
+                            android:textCursorDrawable="@drawable/edt_cursor_bg"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/box"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginTop="10dp"
+
+                        android:hint="Ph Number"
+
+                        app:boxBackgroundColor="@color/white"
+                        app:boxBackgroundMode="outline"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeColor="@color/buttonBg"
+
+
+                        app:boxStrokeWidth="1dp"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="@color/buttonBg"
+                        app:hintEnabled="true"
+                        app:hintTextColor="@color/buttonBg"
+                        app:placeholderText="799700000"
+                        app:prefixText="+91"
+                        app:prefixTextColor="@color/buttonBg"
+                        app:startIconDrawable="@drawable/baseline_phone_android_24"
+                        app:startIconTint="@color/buttonBg">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ed_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+
+
+                            android:inputType="number"
+
+                            android:maxLength="10"
+                            android:textColor="@color/black"
+
+                            android:textColorHint="@color/buttonBg"
+
+
+                            android:textCursorDrawable="@drawable/edt_cursor_bg"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="15dp"
+                        android:id="@+id/update_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_bg"
+                        android:backgroundTint="@color/buttonBg"
+                        android:drawableStart="@drawable/baseline_update_24"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/white"
                         android:gravity="center"
-                        android:text="Profile"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="italic" />
+                        android:paddingLeft="30dp"
+                        android:textAllCaps="false"
+                        android:paddingRight="30dp"
+                        android:text="Update"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+
                 </LinearLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/box"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
 
-                    app:boxBackgroundColor="@color/boxbackground"
-
-                    android:hint="User Name"
-
-                    app:boxBackgroundMode="outline"
-                    app:boxCornerRadiusBottomEnd="15dp"
-                    app:boxCornerRadiusBottomStart="15dp"
-                    app:boxCornerRadiusTopEnd="15dp"
-                    app:boxCornerRadiusTopStart="15dp"
-                    app:boxStrokeColor="@color/black"
-                    app:boxStrokeWidth="1dp"
-
-
-                    app:endIconMode="clear_text"
-                    app:endIconTint="@color/white"
-                    app:hintEnabled="true"
-                    app:hintTextColor="@color/black"
-
-
-                    app:placeholderText="xyz"
-                    app:startIconDrawable="@drawable/profilee"
-                    app:startIconTint="@color/black">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/ed_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-
-
-
-                        android:textColorHint="@color/black"
-                        android:gravity="center_vertical"
-
-                        android:inputType="textWebEmailAddress"
-                        android:maxLength="20"
-
-                        android:textColor="@color/black"
-
-
-                        android:textCursorDrawable="@drawable/edt_cursor_bg"
-                        android:textSize="18sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/box"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginTop="10dp"
-
-                    android:hint="Ph Number"
-
-                    app:boxBackgroundMode="outline"
-                    app:boxCornerRadiusBottomEnd="15dp"
-                    app:boxCornerRadiusBottomStart="15dp"
-                    app:boxCornerRadiusTopEnd="15dp"
-                    app:boxCornerRadiusTopStart="15dp"
-                    app:boxStrokeColor="@color/black"
-                    app:boxStrokeWidth="1dp"
-
-
-                    app:endIconMode="clear_text"
-                    app:endIconTint="@color/black"
-                    app:hintEnabled="true"
-                    app:hintTextColor="@color/black"
-                    app:boxBackgroundColor="@color/boxbackground"
-                    app:prefixText="+91"
-                    app:prefixTextColor="@color/black"
-                    app:placeholderText="799700000"
-                    app:startIconDrawable="@drawable/baseline_phone_android_24"
-                    app:startIconTint="@color/black">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/ed_number"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:textColorHint="@color/black"
-
-
-
-                        android:gravity="center_vertical"
-
-                        android:inputType="number"
-                        android:maxLength="10"
-
-                        android:textColor="@color/black"
-
-
-                        android:textCursorDrawable="@drawable/edt_cursor_bg"
-                        android:textSize="18sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-              <LinearLayout
-                  android:id="@+id/update_profile"
-                  android:padding="1.5dp"
-                  android:backgroundTint="@color/black"
-                  android:background="@drawable/edittext_background"
-                  android:layout_marginEnd="0dp"
-                  android:layout_gravity="end"
-                  android:layout_marginTop="15dp"
-                  android:layout_marginBottom="15dp"
-                  android:orientation="horizontal"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content">
-                  <TextView
-                      android:textStyle="bold"
-                      android:layout_marginStart="10dp"
-                   android:layout_marginEnd="5dp"
-
-                      android:layout_gravity="center"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:text="Update"
-
-                      android:textColor="@color/black"
-                      android:textSize="18sp"
-                      />
-                  <androidx.cardview.widget.CardView
-
-                      android:layout_gravity="end"
-                      app:cardCornerRadius="20dp"
-                      android:backgroundTint="@color/black"
-
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content">
-
-                      <ImageView
-
-                          android:backgroundTint="@color/white"
-                          android:background="@drawable/baseline_update_24"
-android:layout_marginStart="6dp"
-                          android:layout_marginTop="5dp"
-                          android:layout_marginEnd="5dp"
-                          android:layout_marginBottom="5dp"
-                          android:layout_width="22dp"
-                          android:layout_gravity="center"
-                          android:layout_height="22dp"
-
-                          />
-
-                  </androidx.cardview.widget.CardView>
-              </LinearLayout>
-
-            </LinearLayout>
-
-
-            <!--  <RelativeLayout
+                <!--  <RelativeLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -284,59 +262,59 @@ android:layout_marginStart="6dp"
             </RelativeLayout>-->
 
 
-            <LinearLayout
-                android:id="@+id/paswd_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/pasd_signUp"
+                <LinearLayout
+                    android:id="@+id/paswd_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/edittext_background"
-                    android:drawableLeft="@drawable/paswordd"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/white"
-                    android:hint="Password"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/pasd_signUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_background"
+                        android:drawableLeft="@drawable/paswordd"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/white"
+                        android:hint="Password"
 
 
-                    android:inputType="textVisiblePassword"
-                    android:minHeight="48dp"
-                    android:paddingLeft="10dp"
+                        android:inputType="textVisiblePassword"
+                        android:minHeight="48dp"
+                        android:paddingLeft="10dp"
 
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white" />
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white" />
 
-                <EditText
-                    android:id="@+id/confirm_pasd_signUp"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/edittext_background"
-                    android:drawableLeft="@drawable/paswordd"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/white"
-                    android:hint="Confirm Password"
+                    <EditText
+                        android:id="@+id/confirm_pasd_signUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_background"
+                        android:drawableLeft="@drawable/paswordd"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/white"
+                        android:hint="Confirm Password"
 
-                    android:inputType="textPassword"
-                    android:minHeight="48dp"
-                    android:paddingLeft="10dp"
+                        android:inputType="textPassword"
+                        android:minHeight="48dp"
+                        android:paddingLeft="10dp"
 
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white" />
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white" />
+                </LinearLayout>
+
+
             </LinearLayout>
 
-
-        </LinearLayout>
-
-</androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
     </RelativeLayout>
 

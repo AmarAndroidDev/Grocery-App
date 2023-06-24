@@ -79,9 +79,9 @@ int VIEW_TYPE_SINGLE_ORDERS=2;
 
             SingleOrderDetails details = list.get(holder.getAdapterPosition());
 
-            Glide.with(context).load(details.getImgUrl()).into(((CartViewHolder) holder).img);
+            Glide.with(context).load(details.getImgUri()).into(((CartViewHolder) holder).img);
             ((CartViewHolder) holder).unit.setText(String.valueOf(details.getUnit())+" Unit");
-            ((CartViewHolder) holder).qty.setText(String.valueOf(details.getQty())+" /");
+            ((CartViewHolder) holder).qty.setText(String.valueOf(details.getQty())+"/");
 
             ((CartViewHolder) holder).quantityCart.setText(String.valueOf(details.getUnit()));
             ((CartViewHolder) holder).name.setText(details.getName());
@@ -109,7 +109,9 @@ sum=details.getTotalprice()+sum;
                         ((CartViewHolder) holder).quantityCart.setText(String.valueOf(unityy[0]));
                         ((CartViewHolder) holder).unit.setText(String.valueOf(unityy[0]));
                         totalPrice = Integer.parseInt(String.valueOf(list.get(holder.getAdapterPosition()).getPrice())) * unityy[0];
-                        database.collection("CurrentUser").document(auth.getCurrentUser().getUid()).collection("cart").document(list.get(holder.getAdapterPosition()).getIdd())
+                        String id=list.get(holder.getAdapterPosition()).getId();
+
+                        database.collection("CurrentUser").document(auth.getUid()).collection("cart").document(id)
                                 .update("unit", unityy[0], "totalprice", totalPrice).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -156,7 +158,7 @@ sum=details.getTotalprice()+sum;
                         ((CartViewHolder) holder).quantityCart.setText(String.valueOf(unityy[0]));
                         ((CartViewHolder) holder).unit.setText(String.valueOf(unityy[0]));
                         totalPrice = Integer.parseInt(String.valueOf(list.get(holder.getAdapterPosition()).getPrice())) * unityy[0];
-                        database.collection("CurrentUser").document(auth.getCurrentUser().getUid()).collection("cart").document(list.get(holder.getAdapterPosition()).getIdd())
+                        database.collection("CurrentUser").document(auth.getCurrentUser().getUid()).collection("cart").document(list.get(holder.getAdapterPosition()).getId())
                                 .update("unit", unityy[0], "totalprice", totalPrice).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -198,7 +200,7 @@ minusMarketPrice=details.getMarktPrice()*details.getUnit()+minusMarketPrice;
 
                     }
                     if (unityy[0] ==0) {
-                        database.collection("CurrentUser").document(auth.getCurrentUser().getUid()).collection("cart").document(list.get(holder.getAdapterPosition()).getIdd())
+                        database.collection("CurrentUser").document(auth.getCurrentUser().getUid()).collection("cart").document(list.get(holder.getAdapterPosition()).getId())
                                 .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -206,7 +208,7 @@ minusMarketPrice=details.getMarktPrice()*details.getUnit()+minusMarketPrice;
 
                                     }
                                 });
-                        list.remove(holder.getAdapterPosition());
+                        removeItem(holder.getAdapterPosition());
                         for (int i=0;i<list.size();i++){
 
                             int[] temp=new int[]{list.get(i).getTotalprice()};
@@ -227,11 +229,11 @@ minusMarketPrice=details.getMarktPrice()*details.getUnit()+minusMarketPrice;
         }
         if (holder.getClass()==OrderViewHolder.class){
             ((OrderViewHolder) holder).totalPrice.setText("₹" + String.valueOf(list.get(position).getTotalprice()));
-            ((OrderViewHolder) holder).qty.setText(String.valueOf(list.get(position).getQty()));
-            ((OrderViewHolder) holder).unit.setText(String.valueOf(list.get(position).getUnit()));
+            ((OrderViewHolder) holder).qty.setText(String.valueOf(list.get(position).getQty()+"/"+list.get(position).getUnit()+"Unit"));
+           // ((OrderViewHolder) holder).unit.setText(String.valueOf(list.get(position).getUnit()));
             ((OrderViewHolder) holder).price.setText("₹" + list.get(position).getPrice());
             ((OrderViewHolder) holder).name.setText(list.get(position).getName());
-            Glide.with(context).load(list.get(position).getImgUrl()).into(((OrderViewHolder) holder).img);
+            Glide.with(context).load(list.get(position).getImgUri()).into(((OrderViewHolder) holder).img);
 
 
         }
@@ -251,6 +253,10 @@ minusMarketPrice=details.getMarktPrice()*details.getUnit()+minusMarketPrice;
     @Override
     public int getItemCount() {
         return list.size();
+    }
+    public void removeItem(int position) {
+        list.remove(position);
+        notifyItemRemoved(position);
     }
 
     public class CartViewHolder extends RecyclerView.ViewHolder {
@@ -272,7 +278,7 @@ minusMarketPrice=details.getMarktPrice()*details.getUnit()+minusMarketPrice;
         }
     }
     public class OrderViewHolder extends RecyclerView.ViewHolder {
-        TextView price, qty, name, totalPrice,unit;
+        TextView price, qty, name, totalPrice;
         ImageView img;
 
 
@@ -281,7 +287,7 @@ minusMarketPrice=details.getMarktPrice()*details.getUnit()+minusMarketPrice;
             totalPrice = itemView.findViewById(R.id.cart_totalPrice);
             img = itemView.findViewById(R.id.cart_img);
             qty = itemView.findViewById(R.id.qty);
-            unit = itemView.findViewById(R.id.unit);
+           // unit = itemView.findViewById(R.id.unit);
             price = itemView.findViewById(R.id.cart_price);
             name = itemView.findViewById(R.id.cart_name);
 

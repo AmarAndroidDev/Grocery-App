@@ -1,7 +1,7 @@
 package com.example.groceryappp.Activity.AllModel;
 
 public class UserOrderHeader {
-    String name,date,orderId,number,imgUrl,adress,status,uid,longitude,lattitude;
+    String name,date,orderId,number,imgUri,adress,status,uid,longitude,lattitude;
 int total;
 
     public String getAdress() {
@@ -60,12 +60,13 @@ int total;
         return name;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+
+    public String getImgUri() {
+        return imgUri;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImgUri(String imgUri) {
+        this.imgUri = imgUri;
     }
 
     public UserOrderHeader() {

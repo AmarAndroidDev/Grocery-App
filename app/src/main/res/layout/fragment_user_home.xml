@@ -15,23 +15,48 @@
 
 
 
-
-    <androidx.recyclerview.widget.RecyclerView
-
-        android:id="@+id/rcv_vegHeadline"
+<androidx.cardview.widget.CardView
+    android:layout_margin="10dp"
+    android:id="@+id/card"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/demo"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:text="Categories"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <androidx.recyclerview.widget.RecyclerView
+android:layout_gravity="center"
+            android:id="@+id/rcv_vegHeadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:layout_marginStart="10dp"
-    />
+
+            />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+
 
 
 
         <androidx.viewpager.widget.ViewPager
-            android:layout_below="@+id/rcv_vegHeadline"
+            android:layout_below="@+id/card"
             android:id="@+id/viewpager1"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="180dp" />
 
 
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
@@ -42,21 +67,50 @@
     android:layout_centerInParent="true"
 
         app:dotsColor="#A3A0A0"
-        app:dotsCornerRadius="8dp"
-        app:dotsSize="10dp"
+        app:dotsCornerRadius="5dp"
+        app:dotsSize="5dp"
         app:dotsSpacing="4dp"
         app:dotsWidthFactor="2"
         app:progressMode="true"
         app:selectedDotColor="#3F51B5" />
 
-    <androidx.recyclerview.widget.RecyclerView
-
-        android:id="@+id/rcv_allveg"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dots_indicator"
         android:layout_marginStart="10dp"
-         />
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:elevation="30dp"
+        app:cardCornerRadius="25dp">
+<LinearLayout
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="380dp">
+    <TextView
+
+     android:layout_gravity="center"
+        android:text="Regular Items"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_allveg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+
+
+        />
+
+</LinearLayout>
+
+    </androidx.cardview.widget.CardView>
     <com.jpardogo.android.googleprogressbar.library.GoogleProgressBar
 
 android:visibility="gone"

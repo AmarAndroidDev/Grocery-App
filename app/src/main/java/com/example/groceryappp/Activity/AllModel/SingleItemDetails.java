@@ -1,8 +1,16 @@
 package com.example.groceryappp.Activity.AllModel;
 
 public class SingleItemDetails {
-    String name,imgUrl,qty;
+    String name,imgUri,qty;
     int totalprice,price,unit;
+
+    public String getImgUri() {
+        return imgUri;
+    }
+
+    public void setImgUri(String imgUri) {
+        this.imgUri = imgUri;
+    }
 
     public int getUnit() {
         return unit;
@@ -28,13 +36,9 @@ public class SingleItemDetails {
         this.name = name;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
+
+
 
     public int getPrice() {
         return price;
@@ -53,12 +57,13 @@ public class SingleItemDetails {
         this.totalprice = totalprice;
     }
 
-    public SingleItemDetails(String name, int price, String qty, int totalprice,String imgUrl,int unit) {
+    public SingleItemDetails(String name, int price, String qty, int totalprice,int unit,String imgUri) {
         this.name = name;
         this.price = price;
         this.qty = qty;
         this.totalprice = totalprice;
-        this.imgUrl = imgUrl;
+        this.imgUri = imgUri;
+
         this.unit = unit;
     }
 }

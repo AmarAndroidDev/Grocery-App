@@ -9,11 +9,15 @@
     <color name="fedblack">#28282B</color>
     <color name="fedwhite">#AFAFAF</color>
     <color name="fullfedwhite">#D6D2D2</color>
-    <color name="white">#EDEADE</color>
+    <color name="white">#FFFF</color>
     <color name="lightWhite">#B3EDEADF</color>
     <color name="bg1">#03DAC5</color>
-    <color name="bg2">#228B22</color>
+    <color name="greenBg">#008000</color>
+    <color name="darkGreen">#023020</color>
+    <color name="bg2">#009E60</color>
+    <color name="buttonBg">#19543E</color>
     <color name="lightbg2">#80228C22</color>
+    <color name="greenborder">	#3CB371</color>
     <color name="grey">#E5E4E2</color>
     <color name="lightgreen">#00FF7F</color>
     <color name="boxbackground">#33B3B3B3</color>

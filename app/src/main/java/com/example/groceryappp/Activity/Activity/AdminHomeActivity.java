@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.groceryappp.Activity.Fragment.PrdouctFragment;
+import com.example.groceryappp.Activity.Fragment.ProfileFragment;
 import com.example.groceryappp.Activity.Fragment.SellerOrderFragment;
 import com.example.groceryappp.R;
 import com.google.android.gms.dynamic.IFragmentWrapper;
@@ -45,7 +46,7 @@ private boolean available=false;
         edtProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminHomeActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(AdminHomeActivity.this, ProfileFragment.class);
                 intent.putExtra("userType", "seller");
                 startActivity(new Intent(intent));
             }

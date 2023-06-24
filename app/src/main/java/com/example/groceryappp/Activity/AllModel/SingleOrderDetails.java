@@ -6,8 +6,8 @@ import java.io.Serializable;
 
 public class SingleOrderDetails implements Serializable {
     @Exclude
-    String idd;
-    String name,type,imgUrl,desc,availiable,qty;
+    String id;
+    String name,type,imgUri,desc,availiable,qty;
     int marktPrice,viewType,unit;
     int price;
 
@@ -29,17 +29,20 @@ public class SingleOrderDetails implements Serializable {
         this.unit = unit;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
 
 
 public static final int VIEW_TYPE_SINGLE_CART=1;
-public static final int VIEW_TYPE_SINGLE_ORDERS=2;
+
+    public String getImgUri() {
+        return imgUri;
+    }
+
+    public void setImgUri(String imgUri) {
+        this.imgUri = imgUri;
+    }
+
+    public static final int VIEW_TYPE_SINGLE_ORDERS=2;
 
     public int getViewType() {
         return viewType;
@@ -51,19 +54,15 @@ public static final int VIEW_TYPE_SINGLE_ORDERS=2;
         this.viewType = viewType;
     }
 
-    public String getIdd() {
-        return idd;
+    public String getId() {
+        return id;
     }
 
-    public void setIdd(String idd) {
-        this.idd = idd;
+    public void setId(String id) {
+        this.id = id;
     }
 
 
-
-    public void setImgUri(String imgUri) {
-        this.imgUrl = imgUri;
-    }
 
     public String getDesc() {
         return desc;

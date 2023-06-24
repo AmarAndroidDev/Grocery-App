@@ -29,7 +29,7 @@ import com.example.groceryappp.Activity.AllModel.SingleItemDetails;
 import com.example.groceryappp.Activity.AllModel.SingleOrderDetails;
 import com.example.groceryappp.Activity.AllModel.UserOrderHeader;
 import com.example.groceryappp.Activity.Fragment.CartFragment;
-import com.example.groceryappp.Activity.HomeActivity;
+
 import com.example.groceryappp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,23 +47,24 @@ import java.util.Map;
 public class UserPlaceOrderActivity extends AppCompatActivity {
     FirebaseFirestore database;
     ArrayList<SingleOrderDetails> list;
-    private RadioButton cashOnDelivery;
     FirebaseAuth auth;
-  ProgressDialog dialog;
-  AlertDialog.Builder alertDialog;
+    ProgressDialog dialog;
+    AlertDialog.Builder alertDialog;
+    private   UserOrderHeader header;
     int finalsaved;
-    int finalMrp=0;
-    int tempmrp=0;
+    int finalMrp = 0;
+    int tempmrp = 0;
     String fullAdress;
     TextView txtresponse;
     ProgressDialog progressDialog;
-    String userName, number1;
+    String userName, number1,resultName,resultNumber,resultFullAddres;
     int summ;
-    String sellerId,lattitude,longitude;
+    String sellerId, lattitude, longitude;
+    private RadioButton cashOnDelivery;
     private AppCompatButton placeOrder;
-    private TextView totalPrice, fulladress, username, number,totalItem,totalSaved,total,totalMrp,deliveryFee;
+    private TextView totalPrice, fulladress, username, number, totalItem, totalSaved, total, totalMrp, deliveryFee;
     private AdressModel model;
-    private ImageView editAdress,back;
+    private ImageView editAdress, back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,28 +77,19 @@ public class UserPlaceOrderActivity extends AppCompatActivity {
         list = new ArrayList<>();
         list = (ArrayList<SingleOrderDetails>) getIntent().getSerializableExtra("list");
 
-        totalItem.setText(String.valueOf(list.size())+"(Items)");
+        totalItem.setText(String.valueOf(list.size()) + "(Items)");
         for (int i = 0; i < list.size(); i++) {
-
-
-             finalMrp= list.get(i).getMarktPrice()+finalMrp;
-
-
-
-
-
+            finalMrp = list.get(i).getMarktPrice() + finalMrp;
         }
 
-        totalMrp.setText(String.valueOf("₹"+finalMrp));
-        deliveryFee.setText("₹"+"10");
-
-
+        totalMrp.setText(String.valueOf("₹" + finalMrp));
+        deliveryFee.setText("₹" + "10");
         ///getting Intent
-       summ= Integer.parseInt(getIntent().getStringExtra("sum"));
-        finalsaved=finalMrp-summ;
-        totalPrice.setText(String.valueOf("₹"+summ));
+        summ = Integer.parseInt(getIntent().getStringExtra("sum"));
+        finalsaved = finalMrp - summ;
+        totalPrice.setText(String.valueOf("₹" + summ));
 
-        totalSaved.setText(String.valueOf("₹"+finalsaved));
+        totalSaved.setText(String.valueOf("₹" + finalsaved));
         editAdress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,55 +98,38 @@ public class UserPlaceOrderActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
-back.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-finish();
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
 
-    }
-});
+            }
+        });
         fetchingDialog();
         ////fetching adress details
         database.collection("CurrentUser").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                userName = String.valueOf(documentSnapshot.get("username"));
+                userName = String.valueOf(documentSnapshot.get("name"));
                 number1 = String.valueOf(documentSnapshot.get("number"));
-
-                fullAdress = String.valueOf(documentSnapshot.get("fulladress"));
+                fullAdress = String.valueOf(documentSnapshot.get("fullAd"));
                 lattitude = String.valueOf(documentSnapshot.get("latitude"));
                 longitude = String.valueOf(documentSnapshot.get("longitude"));
-
-
                 username.setText(userName);
                 number.setText(number1);
                 fulladress.setText(fullAdress);
-progressDialog.dismiss();
+                progressDialog.dismiss();
 
             }
         });
-
-        ////getting selller id for save order to seller database
-        database.collection("CurrentUser").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for (DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()) {
-                    if (snapshot.get("acounttype").equals("Seller")) {
-                        sellerId = String.valueOf(snapshot.get("uid"));
-                    }
-                }
-            }
-        });
-
 
         placeOrder.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                if (checkPaymentOption()){
+                if (checkPaymentOption()) {
                     showAlertForPlaceOrder();
-                }
-           else{
+                } else {
                     Toast.makeText(UserPlaceOrderActivity.this, "Please Select Payment Mode", Toast.LENGTH_SHORT).show();
 
                 }
@@ -162,75 +137,72 @@ progressDialog.dismiss();
             }
 
 
-
         });
     }
 
     private void showAlertForPlaceOrder() {
-        alertDialog=new AlertDialog.Builder(this);
+        alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("Confirm Order").setMessage("Are you sure to place order ?").setIcon(R.drawable.confirm_order).setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                dialog = new ProgressDialog(UserPlaceOrderActivity.this);
+                dialog.setCancelable(false);
+                dialog.setMessage("Order Placing....");
+                dialog.show();
+                String timestamp = "" + System.currentTimeMillis();
+if (resultName!=null&&resultNumber!=null&&resultFullAddres!=null){
+    header= new UserOrderHeader(resultName, timestamp, timestamp, resultNumber, resultFullAddres, "InProgress", "", "", summ);
 
+}else {
+    header= new UserOrderHeader(userName, timestamp, timestamp, number1, fullAdress, "InProgress", longitude, lattitude, summ);
 
-                    dialog = new ProgressDialog(UserPlaceOrderActivity.this);
-                    dialog.setCancelable(false);
-                    dialog.setTitle("Order Placing");
-                    dialog.setIcon(R.drawable.order_placing);
-                    dialog.setMessage("Please wait a moment....");
-                    dialog.show();
-                    String timestamp = "" + System.currentTimeMillis();
-
-                    UserOrderHeader header=new UserOrderHeader(userName,timestamp,timestamp,number1,fullAdress,"InProgress",longitude,lattitude,summ);
-
-
+}
 ///here i save order details to firebase
-                    database.collection("CurrentUser").document(auth.getUid()).collection("orders").document(timestamp).set(header).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
+                database.collection("CurrentUser").document(auth.getUid()).collection("orders").document(timestamp).set(header).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
 
-                            for (int i = 0; i < list.size(); i++) {
-                                String name = list.get(i).getName();
-                                int price = list.get(i).getPrice();
-                                int unit = list.get(i).getUnit();
-                                String id = list.get(i).getIdd();
-                                int totalprice = list.get(i).getTotalprice();
-                                String img = list.get(i).getImgUrl();
-                                String qty = list.get(i).getQty();
+                        for (int i = 0; i < list.size(); i++) {
+                            String name = list.get(i).getName();
+                            int price = list.get(i).getPrice();
+                            int unit = list.get(i).getUnit();
+                            String id = list.get(i).getId();
+                            int totalprice = list.get(i).getTotalprice();
+                            String img = list.get(i).getImgUri();
+                            String qty = list.get(i).getQty();
+                            SingleItemDetails details = new SingleItemDetails(name, price, qty, totalprice, unit, img);
+                            ///here i set details of cart like how much qty,how much item
+                            database.collection("CurrentUser").document(auth.getUid()).collection("orders").document(timestamp).collection("items").document(id).set(details)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            //here save the orderheader into sellr db
+                                           // UserOrderHeader header = new UserOrderHeader(name, summ, timestamp, timestamp, number1);
+                                         /*   header.setAdress(fullAdress);
+                                            header.setStatus("InProgress");
+                                            header.setUid(auth.getUid());
+                                            header.setLattitude(lattitude);
+                                            header.setLongitude(longitude);*/
+                                            database.collection("CurrentUser").document("YC7vLsrOpiVkMBqOcseWHL1BLTH3").collection("All orders").document(timestamp).set(header).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
 
-                                SingleItemDetails details = new SingleItemDetails(name, price, qty, totalprice, img, unit);
-                                ///here i set details of cart like how much qty,how much item
-                                database.collection("CurrentUser").document(auth.getUid()).collection("orders").document(timestamp).collection("items").document(id).set(details)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                //here save the orderheader into sellr db
-                                                UserOrderHeader header = new UserOrderHeader(name, summ, timestamp, timestamp, number1);
-                                                header.setAdress(fullAdress);
-                                                header.setStatus("InProgress");
-                                                header.setUid(auth.getUid());
-                                                header.setLattitude(lattitude);
-                                                header.setLongitude(longitude);
-                                                database.collection("CurrentUser").document(sellerId).collection("All orders").document(timestamp).set(header).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void unused) {
+                                                }
+                                            });
 
-                                                    }
-                                                });
+                                            ///here save all order item into th seller db
+                                            database.collection("CurrentUser").document("YC7vLsrOpiVkMBqOcseWHL1BLTH3").collection("All orders").document(timestamp).collection("items").document(id).set(details).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
 
-                                                ///here save all order item into th seller db
-                                                database.collection("CurrentUser").document(sellerId).collection("All orders").document(timestamp).collection("items").document(id).set(details).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void unused) {
-
-                                                    }
-                                                });
+                                                }
+                                            });
 
 
-                                                ///here after saving the orders details clear the cart details
-                                                database.collection("CurrentUser").document(auth.getUid()).collection("cart").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void unused) {
+                                            ///here after saving the orders details clear the cart details
+                                            database.collection("CurrentUser").document(auth.getUid()).collection("cart").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
 
                                                       /*  Toast.makeText(UserPlaceOrderActivity.this, "Successfully Order Placed", Toast.LENGTH_SHORT).show();
                                                         Intent intent = new Intent(UserPlaceOrderActivity.this, UserOrderHeaderActivity.class);
@@ -239,32 +211,31 @@ progressDialog.dismiss();
                                                         startActivity(intent);
                                                          finish();
 */
-                                                    }
-                                                });
+                                                }
+                                            });
 ///send the notification
-                                                PreparedNotification(timestamp);
+                                            PreparedNotification(timestamp);
 
 
-                                            }
+                                        }
 
 
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
 
-                                            }
-                                        });
-
-
-                            }
+                                        }
+                                    });
 
 
                         }
-                    });
 
 
-                }
+                    }
+                });
 
+
+            }
 
 
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -276,9 +247,9 @@ progressDialog.dismiss();
     }
 
     private boolean checkPaymentOption() {
-        if (cashOnDelivery.isChecked()){
+        if (cashOnDelivery.isChecked()) {
             return true;
-        }else return false;
+        } else return false;
     }
 
     private void PreparedNotification(String orderId) {
@@ -299,7 +270,7 @@ progressDialog.dismiss();
             ///WHAT TO SEND
             notificationBody.put("notificationtype", NOTIFICATION_TYPE);
             notificationBody.put("buyerid", auth.getUid());
-            notificationBody.put("sellerid", "ODR0CUvoQ5ecbEaU2ZWVENCLGEt2");
+            notificationBody.put("sellerid", "YC7vLsrOpiVkMBqOcseWHL1BLTH3");
             notificationBody.put("orderid", orderId);//timestamp is the order id
             notificationBody.put("notificationtitle", NOTIFICATION_TITLE);
             notificationBody.put("notificationmessage", NOTIFICATION_MESSAGE);
@@ -308,9 +279,7 @@ progressDialog.dismiss();
             notificationJo.put("data", notificationBody);
 
 
-
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Toast.makeText(this, "Error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
         }
@@ -329,8 +298,8 @@ progressDialog.dismiss();
                 intent.putExtra("orderId", orderId);
                 intent.putExtra("sum", summ);
                 intent.putExtra("ordertype", "placeOrder");
-                intent.putExtra("orderTo", "ODR0CUvoQ5ecbEaU2ZWVENCLGEt2");
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("orderTo", "YC7vLsrOpiVkMBqOcseWHL1BLTH3");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 startActivity(intent);
                 finish();
@@ -344,13 +313,12 @@ progressDialog.dismiss();
                 Intent intent = new Intent(UserPlaceOrderActivity.this, PlaceOrderCompleteCelebration.class);
                 intent.putExtra("ordrId", orderId);
                 intent.putExtra("sum", summ);
-                intent.putExtra("orderTo", "ODR0CUvoQ5ecbEaU2ZWVENCLGEt2");
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("orderTo", "YC7vLsrOpiVkMBqOcseWHL1BLTH3");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
 
                 startActivity(intent);
                 finish();
-
 
 
             }
@@ -385,7 +353,12 @@ progressDialog.dismiss();
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
-
+resultName=data.getStringExtra("Name");
+resultNumber=data.getStringExtra("Number");
+resultFullAddres=data.getStringExtra("Full_Add");
+username.setText(resultName);
+number.setText(resultNumber);
+fulladress.setText(resultFullAddres);
             }
 
 
@@ -409,6 +382,7 @@ progressDialog.dismiss();
 
         editAdress = findViewById(R.id.edit_adress);
     }
+
     private void fetchingDialog() {
         progressDialog = new ProgressDialog((UserPlaceOrderActivity.this));
         progressDialog.setMessage("Loading....");

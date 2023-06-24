@@ -152,8 +152,8 @@ public class UserOrderDetailsActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserOrderDetailsActivity.this, UserOrderHeaderActivity.class));
-                finish();
+              onBackPressed();
+
             }
         });
         ////delete the product
@@ -176,7 +176,7 @@ public class UserOrderDetailsActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
-                                //now 1st dekete item data then i wl go for order delete
+                                //now 1st delete item data then  go for order delete
                                 for (DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()) {
                                     database.collection("CurrentUser").document(auth.getUid()).collection("orders").document(orderId).collection("items").document(snapshot.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
@@ -242,7 +242,7 @@ public class UserOrderDetailsActivity extends AppCompatActivity {
             public void onSuccess(Void unused) {
                 //now update in seller DB
                 database.collection("CurrentUser").document(
-                        "ODR0CUvoQ5ecbEaU2ZWVENCLGEt2").collection("All orders").document(orderId).update("status", "Cancel").addOnSuccessListener(new OnSuccessListener<Void>() {
+                        "YC7vLsrOpiVkMBqOcseWHL1BLTH3").collection("All orders").document(orderId).update("status", "Cancel").addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         PreparedNotification(orderId);
@@ -270,8 +270,9 @@ public class UserOrderDetailsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-startActivity(new Intent(this,UserOrderHeaderActivity.class));
-finish();
+        Intent intent=new Intent(UserOrderDetailsActivity.this, UserOrderHeaderActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     private void PreparedNotification(String orderId) {
@@ -293,7 +294,7 @@ finish();
             notificationBody.put("notificationtype", NOTIFICATION_TYPE);
             notificationBody.put("buyerid", auth.getUid());
             notificationBody.put("sellerid",
-                    "ODR0CUvoQ5ecbEaU2ZWVENCLGEt2");
+                    "YC7vLsrOpiVkMBqOcseWHL1BLTH3");
             notificationBody.put("orderid", orderId);//timestamp is the order id
             notificationBody.put("notificationtitle", NOTIFICATION_TITLE);
             notificationBody.put("notificationmessage", NOTIFICATION_MESSAGE);
@@ -321,7 +322,7 @@ finish();
                 intent.putExtra("ordrId", orderId);
                 intent.putExtra("ordertype", "placeOrder");
                 intent.putExtra("orderTo",
-                        "ODR0CUvoQ5ecbEaU2ZWVENCLGEt2");
+                        "YC7vLsrOpiVkMBqOcseWHL1BLTH3");
                 finish();
                 startActivity(intent);*/
 

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!--<corners android:topLeftRadius="50dp"
-    android:topRightRadius="50dp"
+<corners android:topLeftRadius="30dp"
+    android:topRightRadius="30dp"
 
-    />-->
+    />
 
-    <gradient android:centerColor="#E6228C22"
-        android:endColor="#272727"
+    <gradient android:centerColor="@color/bg2"
+        android:endColor="@color/buttonBg"
 
-        android:startColor="#272727"
+        android:startColor="@color/buttonBg"
   android:type="linear"
 
         />
