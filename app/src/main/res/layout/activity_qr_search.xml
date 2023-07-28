@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activity.Activity.QrSearchActivity">
+
+    <RelativeLayout
+
+        android:orientation="vertical"
+        android:id="@+id/scanLayout"
+
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <SurfaceView
+
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <androidx.cardview.widget.CardView
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+             android:layout_marginStart="10dp"
+                android:id="@+id/cancel"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+
+
+
+
+                android:background="@drawable/baseline_arrow_back_ios_24"
+                android:backgroundTint="@color/buttonBg" />
+
+        </androidx.cardview.widget.CardView>
+        <!--  <androidx.cardview.widget.CardView
+
+              android:layout_marginEnd="10dp"
+              android:layout_marginTop="50dp"
+              app:cardCornerRadius="8dp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+              <ImageButton
+
+                  android:id="@+id/flshOff"
+                  android:layout_width="22dp"
+                  android:layout_height="22dp"
+
+                  android:layout_margin="5dp"
+
+
+                  android:background="@drawable/flashoff"
+                  />
+          </androidx.cardview.widget.CardView>-->
+
+        <LinearLayout
+            android:weightSum="3"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@color/colorQrScan"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="center"
+                    android:text="Place the QR code inside the area"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="Scanning will start automatically"
+                    android:textColor="#B3FFFFFF"
+                    android:textSize="14dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:background="@color/colorQrScan"
+                    android:layout_weight="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <LinearLayout
+                    android:background="@drawable/scan_bg"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/pgLoading"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/scanfinal" />
+                </LinearLayout>
+
+                <TextView
+                    android:background="@color/colorQrScan"
+                    android:layout_weight="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:background="@color/colorQrScan"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/uploadQrImage"
+                    android:drawablePadding="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+              android:drawableTint="@color/white"
+                    android:drawableStart="@drawable/baseline_photo_size_select_actual_24"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Upload Image"
+                    android:background="@drawable/button_bg"
+                    />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

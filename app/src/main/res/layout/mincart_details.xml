@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+
+        android:id="@+id/minCartLayout"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp"
+        android:orientation="vertical"
+        android:background="@color/bg2"
+
+        android:layout_width="match_parent"
+        android:layout_height="75dp">
+        <TextView
+            android:gravity="center_vertical"
+            android:drawableTint="@color/buttonBg"
+android:drawableStart="@drawable/baseline_shopping_bag_24"
+android:layout_marginTop="15dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/button_bg"
+            android:id="@+id/sellerMinCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text=""
+            />
+        <TextView
+            android:id="@+id/useCart"
+            android:layout_below="@+id/sellerMinCart"
+
+android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:text="Minimum cart amount should be 200"
+            />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/shop_more"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/buttonBg"
+
+            android:gravity="center"
+            android:drawableTint="@color/white"
+
+            android:text="shop more"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:cornerRadius="15dp" />
+    </RelativeLayout>
+</RelativeLayout>

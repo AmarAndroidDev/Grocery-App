@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+android:paddingTop="20dp"
+        android:paddingBottom="15dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="15dp"
+        android:id="@+id/interetLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:orientation="horizontal"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/internet"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/black"
+            android:layout_width="wrap_content"
+android:drawableStart="@drawable/baseline_wifi_off_24"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Please turn on Internet"
+            android:textColor="@color/fedblack" />
+        <ProgressBar
+     android:visibility="gone"
+            android:layout_toLeftOf="@+id/refresh"
+         android:layout_toRightOf="@+id/internet"
+            android:id="@+id/pgbar"
+android:layout_centerVertical="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+
+        <TextView
+
+            android:layout_marginStart="10dp"
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+            android:background="@drawable/button_bg"
+            android:drawableLeft="@drawable/baseline_refresh_24"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingTop="1dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="1dp"
+            android:text="Refresh"
+            android:textSize="12sp"
+            android:textColor="@color/white" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

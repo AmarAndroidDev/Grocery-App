@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    android:paddingBottom="20dp"
+
+
+    >
+    <LinearLayout
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+
+        android:background="@color/bg2"
+   android:gravity="center"
+        android:id="@+id/rela1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+
+
+android:textSize="14sp"
+            android:id="@+id/txt"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="Update order status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+<LinearLayout
+android:layout_below="@+id/rela1"
+    android:paddingStart="40dp"
+    android:paddingEnd="40dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_gravity="center"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <RadioGroup
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <RadioButton
+            android:buttonTint="#FFA000"
+            android:textColor="#FFA000"
+            android:id="@+id/orderPacked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+
+            android:text="Order Packed" />
+
+        <RadioButton
+            android:buttonTint="@color/greenBg"
+            android:textColor="@color/greenBg"
+            android:id="@+id/outForDelivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Out For Delivery" />
+
+        <RadioButton
+            android:textColor="@color/buttonBg"
+            android:visibility="visible"
+            android:buttonTint="@color/buttonBg"
+            android:id="@+id/orderDeliver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+
+            android:text="Order Delivered" />
+
+        <RadioButton
+            android:textColor="@color/red"
+            android:id="@+id/orderCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:buttonTint="@color/red"
+            android:text="Order Cancel" />
+        <RadioButton
+            android:visibility="gone"
+
+            android:id="@+id/rBtnCustom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+
+            android:text="Delivery Tomorrow" />
+    </RadioGroup>
+    <LinearLayout
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="6dp"
+     android:layout_marginTop="18dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <ImageView
+        android:visibility="gone"
+            android:id="@+id/tickOrderPack"
+
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/greenBg"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/baseline_check_circle_outline_24"
+            />
+        <ImageView
+
+     android:visibility="gone"
+            android:id="@+id/tickOutDelivery"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/greenBg"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/baseline_check_circle_outline_24"
+            />
+
+
+
+    </LinearLayout>
+</LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/updateOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/buttonBg"
+
+        android:drawableTint="@color/white"
+        android:gravity="center"
+
+        android:text="Update Order"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:cornerRadius="15dp" />
+
+</LinearLayout>
+
+</RelativeLayout>

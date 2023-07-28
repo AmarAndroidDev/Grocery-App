@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    android:paddingBottom="20dp"
+
+
+    >
+    <LinearLayout
+
+
+        android:background="@color/bg2"
+   android:gravity="center"
+        android:id="@+id/rela1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/pgLoading"
+
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/delvery2" />
+
+        <TextView
+android:layout_marginStart="5dp"
+
+android:textSize="16sp"
+            android:id="@+id/txt"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="Choose Delivery Slot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+<LinearLayout
+android:layout_below="@+id/rela1"
+    android:paddingStart="40dp"
+    android:paddingEnd="40dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RadioGroup
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    <RadioButton
+android:enabled="false"
+        android:id="@+id/rbselfPick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+
+        android:text="Self Pickup" />
+
+    <RadioButton
+        android:visibility="visible"
+        android:enabled="false"
+        android:id="@+id/rB1to5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+
+        android:text="Delivery within 1-5hr" />
+
+    <RadioButton
+        android:enabled="false"
+        android:id="@+id/rbTom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+
+        android:text="Delivery Tomorrow" />
+        <RadioButton
+            android:visibility="gone"
+
+        android:id="@+id/rBtnCustom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+
+        android:text="Delivery Tomorrow" />
+    </RadioGroup>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/confirmOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/buttonBg"
+
+        android:drawableTint="@color/white"
+        android:gravity="center"
+
+        android:text="Confirm Order"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:cornerRadius="15dp" />
+
+</LinearLayout>
+
+</RelativeLayout>
