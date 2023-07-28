@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Activity.UserOrderHeaderActivity">
+    tools:context="com.example.sabjiwala.Activity.UserOrderHeaderActivity">
 <Toolbar
     android:id="@+id/tool"
     android:background="@color/bg2"
@@ -25,7 +25,7 @@ android:layout_marginBottom="5dp"
             android:layout_height="22dp"
             android:layout_gravity="center"
            android:layout_marginLeft="5dp"
-            android:background="@drawable/backarrow" />
+            android:background="@drawable/baseline_arrow_back_ios_24" />
         <TextView
 android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
@@ -43,30 +43,35 @@ android:layout_centerHorizontal="true"
     </RelativeLayout>
 </Toolbar>
 
-    <LinearLayout
+    <RelativeLayout
 android:visibility="gone"
     android:layout_centerVertical="true"
 
         android:id="@+id/emptycart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="170dp"
 
+android:layout_centerHorizontal="true"
 
-        android:gravity="center"
         android:orientation="vertical"
         >
 
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+        <com.airbnb.lottie.LottieAnimationView
 
-            android:layout_marginRight="5dp"
-            android:background="@drawable/emptycart" />
+android:layout_centerHorizontal="true"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/emptycart" />
 
         <TextView
+android:layout_centerHorizontal="true"
+         android:layout_alignParentBottom="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+
             android:maxLines="1"
             android:text="You don't have any order "
             android:textColor="@color/black"
@@ -74,12 +79,30 @@ android:visibility="gone"
             android:textStyle="italic" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 <androidx.recyclerview.widget.RecyclerView
+    android:layout_marginTop="5dp"
     android:layout_below="@+id/tool"
     android:id="@+id/rcv_order_header"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
+    <LinearLayout
+android:layout_below="@+id/tool"
+        android:id="@+id/pgbarHome"
+        android:gravity="center"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/pgLoading"
+
+            android:layout_width="130dp"
+            android:layout_height="120dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/tomato" />
+    </LinearLayout>
 
 
 </RelativeLayout>

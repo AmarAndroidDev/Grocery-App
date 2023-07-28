@@ -26,9 +26,9 @@ app:cardElevation="3dp"
      android:layout_marginTop="7dp"
         app:civ_border_width="1dp"
         app:civ_border_color="@color/black"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="7dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="7dp"
+
+        android:layout_marginEnd="7dp"
         android:layout_gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,17 +36,24 @@ app:cardElevation="3dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<RelativeLayout
+    android:orientation="vertical"
 
+
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    >
     <TextView
+        android:background="@drawable/wave__6_"
         android:textStyle="bold"
         android:gravity="center"
-        android:textSize="10sp"
-        android:text="amarendra"
+        android:backgroundTint="@color/white"
+
         android:textColor="@color/black"
-        android:id="@+id/profile_title"
-        android:layout_gravity="center"
-android:backgroundTint="#FFFF"
-        android:background="@drawable/gradiant_background"
+
+        android:layout_gravity="bottom"
+
+
         android:layout_width="match_parent"
         android:maxLines="1"
         android:layout_height="20dp"
@@ -55,5 +62,27 @@ android:backgroundTint="#FFFF"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:textSize="10sp"
+
+      android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <TextView
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:id="@+id/profile_title"
+        android:layout_alignParentBottom="true"
+        android:textSize="10sp"
+android:layout_marginBottom="3dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="11dp"/>
+
+</RelativeLayout>
+
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

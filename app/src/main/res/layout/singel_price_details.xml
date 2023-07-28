@@ -4,24 +4,18 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15dp"
-android:backgroundTint="@color/greenBg"
+    android:backgroundTint="@color/greenBg"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:layout_marginBottom="5dp"
-    android:layout_marginTop="5dp"
-    >
-
+    android:layout_marginTop="5dp">
     <RelativeLayout
-
-        android:paddingRight="5dp"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content">
-
 <androidx.cardview.widget.CardView
     android:id="@+id/card_veg"
     app:cardCornerRadius="10dp"
-  android:layout_marginLeft="5dp"
-
+android:layout_centerHorizontal="true"
     android:layout_marginTop="5dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -29,12 +23,18 @@ android:backgroundTint="@color/greenBg"
     <ImageView
 
         android:id="@+id/veg_img"
-        android:layout_width="130dp"
-        android:layout_height="120dp"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
 
 
 
         android:scaleType="fitXY" />
+    <ProgressBar
+        android:id="@+id/pgbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
     <TextView
         android:id="@+id/offer_price"
         android:textSize="13sp"
@@ -47,7 +47,23 @@ android:backgroundTint="@color/greenBg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
+    <TextView
+        android:visibility="gone"
+        android:background="@color/white"
+        android:id="@+id/not_available"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:maxLines="1"
+        android:text="not available"
+        android:textAllCaps="true"
+        android:textColor="@color/merun"
+        android:textSize="12sp"
+        android:textStyle="bold"
+       />
 </androidx.cardview.widget.CardView>
+
+
 
         <TextView
             android:layout_marginTop="2dp"
@@ -66,8 +82,10 @@ android:layout_below="@+id/card_veg"
             android:textStyle="bold"
             />
         <TextView
+            android:layout_alignParentRight="true"
             android:layout_marginTop="2dp"
-            android:gravity="start"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
             android:id="@+id/qty_veg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,7 +99,7 @@ android:textColor="@color/grey"
         <TextView
 
 
-android:layout_marginStart="10dp"
+android:layout_marginStart="15dp"
 android:layout_below="@+id/title_veg"
             android:id="@+id/marketPrice"
             android:layout_width="35dp"
@@ -94,68 +112,72 @@ android:layout_below="@+id/title_veg"
             android:background="@drawable/minus"
 
             />
+        <TextView
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+android:layout_below="@+id/qty_veg"
+android:layout_toRightOf="@+id/marketPrice"
+            android:id="@+id/price_veg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="22"
+            android:textColor="@color/grey"
+            android:textSize="14sp"
 
+            />
 
 
         <RelativeLayout
-            android:layout_marginLeft="10dp"
+android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_below="@+id/marketPrice"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
 
 
-            <TextView
 
-
-
-
-                android:id="@+id/price_veg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="22"
-                android:textColor="@color/grey"
-                android:textSize="14sp"
-
-                />
            <LinearLayout
 
-               android:layout_marginStart="20dp"
-android:layout_toRightOf="@+id/price_veg"
-           android:id="@+id/add_to_cart"
+android:layout_centerHorizontal="true"
+
 
           android:gravity="center"
-               android:layout_width="70dp"
+               android:layout_width="match_parent"
                android:layout_height="20dp"
 
 android:background="@drawable/btn_background"
                android:backgroundTint="@color/white"
                >
                <TextView
+android:enabled="false"
+                   android:id="@+id/add_to_cart"
 
-
-
+android:textAllCaps="false"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:maxLines="1"
-                   android:text="ADD"
+                   android:text="Add Item"
                    android:textColor="@color/merun"
-                   android:textSize="14sp"
+                   android:textSize="12sp"
                    android:textStyle="bold"
                    />
            </LinearLayout>
 
               <LinearLayout
-                  android:visibility="gone"
+                android:visibility="gone"
                   android:id="@+id/cart_layout"
                   android:backgroundTint="@color/white"
                   android:background="@drawable/btn_background"
-                  android:layout_marginLeft="50dp"
+
                   android:layout_gravity="center"
-                  android:layout_width="70dp"
+                  android:layout_width="match_parent"
                   android:layout_height="20dp"
                   >
 

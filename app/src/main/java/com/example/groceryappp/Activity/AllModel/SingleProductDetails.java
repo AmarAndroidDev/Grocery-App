@@ -6,8 +6,52 @@ import java.io.Serializable;
 
 public class SingleProductDetails implements Serializable {
     @Exclude String id;
-    String name,type,imgUri,desc,availiable,qty;
-    int marktPrice,price,unit,totalprice;
+    public static final int VIEW_TYPE_SINGLE_CART=1;
+    String name,type,imgUri,desc,availiable,qty,img, category;
+
+
+    int marktPrice,price,unit,totalprice,viewType,profile_pic;
+
+
+    public SingleProductDetails(String name, int price) {
+        this.name=name;
+        this.price=price;
+    }
+    public SingleProductDetails(String name, int price, String qty, String availiable, String category, int marktPrice,String imgUri) {
+        this.availiable = availiable;
+        this.category = category;
+        this.imgUri = imgUri;
+        this.id = id;
+        this.name = name;
+        this.qty = qty;
+        this.marktPrice = marktPrice;
+        this.price = price;
+
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getViewType() {
+        return viewType;
+    }
+
+    public void setViewType(int viewType) {
+        this.viewType = viewType;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public int getTotalprice() {
         return totalprice;
@@ -25,6 +69,15 @@ public class SingleProductDetails implements Serializable {
         this.unit = unit;
     }
 
+    public SingleProductDetails(String name, String qty, String imgUri, int price, int unit, int totalprice) {
+        this.name = name;
+        this.qty = qty;
+        this.imgUri = imgUri;
+        this.price = price;
+        this.unit = unit;
+        this.totalprice = totalprice;
+    }
+
     public SingleProductDetails(String name, String imgUri, String qty, int price, int marktPrice, String id) {
         this.name=name;
         this.imgUri=imgUri;
@@ -34,6 +87,7 @@ public class SingleProductDetails implements Serializable {
         this.id=id;
 
     }
+
 
     public String getQty() {
         return qty;
@@ -58,8 +112,6 @@ public class SingleProductDetails implements Serializable {
     public void setPrice(int price) {
         this.price = price;
     }
-
-    int profile_pic;
 
     public String getId() {
         return id;

@@ -1,9 +1,146 @@
 package com.example.groceryappp.Activity.AllModel;
 
-public class UserInfo {
-    String uid,email,password,number,name,accountType,profilePic,apartment,city,locality,landmark,pincode,fullAd,latitude,longitude;
+import java.io.Serializable;
+
+public class UserInfo implements Serializable {
+    String uid,email,password,number,name,accountType,profilePic,apartment,city,locality,landmark,pincode,fullAd,latitude,longitude,date,orderId,imgUri,adress,status,deliverySlot,cTimePrgrs,cTimePacked,cTimeOutDelivery,cTimeDelivered,saved;
+    int total,sum;
+
+    public int getSum() {
+        return sum;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
+    }
+
+    public String getSaved() {
+        return saved;
+    }
+
+    public void setSaved(String saved) {
+        this.saved = saved;
+    }
 
 
+
+
+    public String getcTimePrgrs() {
+        return cTimePrgrs;
+    }
+
+    public void setcTimePrgrs(String cTimePrgrs) {
+        this.cTimePrgrs = cTimePrgrs;
+    }
+
+
+    public String getcTimePacked() {
+        return cTimePacked;
+    }
+
+    public void setcTimePacked(String cTimePacked) {
+        this.cTimePacked = cTimePacked;
+    }
+
+
+    public String getcTimeOutDelivery() {
+        return cTimeOutDelivery;
+    }
+
+    public void setcTimeOutDelivery(String cTimeOutDelivery) {
+        this.cTimeOutDelivery = cTimeOutDelivery;
+    }
+
+
+    public String getcTimeDelivered() {
+        return cTimeDelivered;
+    }
+
+    public void setcTimeDelivered(String cTimeDelivered) {
+        this.cTimeDelivered = cTimeDelivered;
+    }
+
+    public UserInfo() {
+
+    }
+
+    public UserInfo(String name, String orderId, String date, String number, String fullAd, String status, String longitude, String latitude,
+                    int summ, String deliverySlot, String uid,String saved,String cTimePrgrs , String cTimePacked,String cTimeOutDelivery ,String cTimeDelivered) {
+this.name=name;
+this.orderId=orderId;
+this.date=date;
+this.number=number;
+this.fullAd=fullAd;
+this.status=status;
+this.longitude=longitude;
+this.latitude=latitude;
+this.sum=summ;
+this.deliverySlot=deliverySlot;
+this.uid=uid;
+this.saved=saved;
+this.cTimePrgrs=cTimePrgrs;
+this.cTimePacked=cTimePacked;
+this.cTimeOutDelivery=cTimeOutDelivery;
+this.cTimeDelivered=cTimeDelivered;
+
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getImgUri() {
+        return imgUri;
+    }
+
+    public void setImgUri(String imgUri) {
+        this.imgUri = imgUri;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
+    public String getDeliverySlot() {
+        return deliverySlot;
+    }
+
+    public void setDeliverySlot(String deliverySlot) {
+        this.deliverySlot = deliverySlot;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
 
     public String getLatitude() {
         return latitude;
@@ -21,7 +158,7 @@ public class UserInfo {
         this.longitude = longitude;
     }
 
-    public UserInfo(String uid, String email, String password, String number, String name, String accountType, String profilePic, String apartment, String city, String locality, String landmark, String pincode, String fullAd, String latitude, String longitude) {
+    public UserInfo(String uid, String email, String password, String number, String name, String accountType, String profilePic,String city, String locality, String landmark, String pincode, String fullAd, String latitude, String longitude) {
         this.uid = uid;
         this.email = email;
         this.password = password;
@@ -29,7 +166,6 @@ public class UserInfo {
         this.name = name;
         this.accountType = accountType;
         this.profilePic = profilePic;
-        this.apartment = apartment;
         this.city = city;
         this.locality = locality;
         this.landmark = landmark;

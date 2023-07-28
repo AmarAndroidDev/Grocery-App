@@ -3,11 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.groceryappp">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -20,29 +27,42 @@
         android:theme="@style/Theme.GroceryAppp"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.Activity.SearchActivity"
+            android:name=".Activity.Activity.OnBoardingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Activity.OtpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Activity.QrSearchActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.Activity.PlaceOrderCompleteCelebration"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.Activity.EditDeliveryDetailActivity"
-            android:exported="false" />
+            android:name=".Activity.Activity.AdminEditShopDetails"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.Activity.AdminSearchActivity"
-            android:exported="false" />
+            android:name=".Activity.Activity.AdminHomeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Activity.AdminProductActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Activity.PasswordResetActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Activity.UserOrderDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.Activity.SellerOrderDetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Activity.SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,41 +70,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.Activity.EditProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.Activity.AdressActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.Activity.EditProductActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.Activity.ViewAllActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Activity.LoginActivity"
-            android:exported="true" />
-        <activity
-            android:name=".Activity.Activity.AdminSignUpActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Activity.UserSignUpActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Activity.UserOrderHeaderActivity"
-            android:exported="true" />
-        <activity
-            android:name=".Activity.Activity.VegDetailsActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Activity.UserPlaceOrderActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.Activity.AdminHomeActivity"
-            android:exported="true" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Activity.HomeActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".Activity.ServiceFcm.MyFirebaseMessagingService"
@@ -93,6 +101,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
     </application>
 
 </manifest>

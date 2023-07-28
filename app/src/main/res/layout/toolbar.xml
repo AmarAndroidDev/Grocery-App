@@ -28,7 +28,7 @@
                 android:layout_height="22dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/backarrow" />
+                android:background="@drawable/baseline_arrow_back_ios_24" />
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/searchview"
@@ -54,7 +54,7 @@
                 android:layout_height="25dp"
 
 
-                android:background="@drawable/cart" />
+                android:background="@drawable/baseline_shopping_cart_24" />
     <TextView
      android:visibility="gone"
         android:background="@color/black"

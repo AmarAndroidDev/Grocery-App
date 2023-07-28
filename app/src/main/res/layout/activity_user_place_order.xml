@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Activity.UserPlaceOrderActivity">
+    tools:context="com.example.sabjiwala.Activity.UserPlaceOrderActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -25,7 +25,7 @@
             android:layout_height="25dp"
             android:layout_marginRight="10dp"
 
-            android:background="@drawable/backarrow"
+            android:background="@drawable/baseline_arrow_back_ios_24"
             android:backgroundTint="@color/white" />
 
         <TextView
@@ -35,13 +35,18 @@
 
             android:text="Place Order"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
 
     </androidx.appcompat.widget.Toolbar>
 
+<LinearLayout
+    android:layout_below="@+id/toolbar"
 
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
         android:layout_below="@+id/toolbar"
@@ -72,33 +77,33 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-<RelativeLayout
-android:background="@drawable/gradiant_bg3"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        android:layout_alignParentStart="true"
+                <RelativeLayout
+                    android:background="@drawable/gradiant_bg3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_alignParentStart="true"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="start"
-        android:maxLines="1"
-android:paddingLeft="10dp"
-        android:text="Delivery Details : "
-        android:textColor="@color/white"
-        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:maxLines="1"
+                        android:paddingLeft="10dp"
+                        android:text="Delivery Details : "
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
 
-        />
-    <ImageView
-android:layout_marginEnd="6dp"
-        android:id="@+id/edit_adress"
-        android:layout_width="16dp"
-        android:layout_height="18dp"
-       android:layout_alignParentEnd="true"
-        android:background="@drawable/edit_box"
-        android:backgroundTint="@color/black" />
+                        />
+                    <ImageView
+                        android:layout_marginEnd="6dp"
+                        android:id="@+id/edit_adress"
+                        android:layout_width="16dp"
+                        android:layout_height="18dp"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/baseline_edit_24"
+                        android:backgroundTint="@color/black" />
 
-</RelativeLayout>
+                </RelativeLayout>
 
 
                 <TableLayout
@@ -112,9 +117,7 @@ android:layout_marginEnd="6dp"
 
 
                     <TableRow>
-
                         <TextView
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -193,9 +196,9 @@ android:layout_marginEnd="6dp"
 
                     android:id="@+id/full_adress"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-android:maxLines="4"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:maxLines="4"
 
                     android:text=""
                     android:textColor="@color/black"
@@ -248,13 +251,13 @@ android:maxLines="4"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-            android:background="@drawable/gradiant_bg3"
+                    android:background="@drawable/gradiant_bg3"
                     android:paddingLeft="10dp"
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                                      android:maxLines="1"
-android:layout_gravity="center"
+                    android:maxLines="1"
+                    android:layout_gravity="center"
                     android:text="Order summary : "
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -264,7 +267,7 @@ android:layout_gravity="center"
                 <TableLayout
 
                     android:layout_gravity="center"
-                    android:id="@+id/table_Layout"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -293,19 +296,17 @@ android:layout_gravity="center"
                             />
 
                         <TextView
-android:layout_alignParentRight="true"
+                            android:layout_alignParentRight="true"
                             android:layout_marginEnd="10dp"
                             android:id="@+id/totalitem"
                             android:layout_width="60dp"
                             android:layout_height="wrap_content"
-
                             android:layout_marginTop="5dp"
                             android:gravity="start"
                             android:maxLines="1"
                             android:text=""
                             android:textColor="@color/black"
                             android:textSize="14sp"
-
                             />
 
                     </RelativeLayout>
@@ -322,13 +323,11 @@ android:layout_alignParentRight="true"
                             android:text="Total Mrp: "
                             android:textColor="@color/black"
                             android:textSize="14sp"
-
-
                             />
 
                         <TextView
                             android:layout_alignParentEnd="true"
-                           android:layout_marginEnd="10dp"
+                            android:layout_marginEnd="10dp"
                             android:id="@+id/total_mrp"
                             android:layout_width="60dp"
                             android:layout_height="wrap_content"
@@ -354,8 +353,6 @@ android:layout_alignParentRight="true"
                             android:text="Total Price: "
                             android:textColor="@color/black"
                             android:textSize="14sp"
-
-
                             />
 
                         <TextView
@@ -372,41 +369,6 @@ android:layout_alignParentRight="true"
                             android:textSize="14sp"
 
                             />
-
-                    </RelativeLayout>
-                    <RelativeLayout>
-
-                        <TextView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_marginStart="20dp"
-                            android:gravity="start"
-                            android:maxLines="1"
-                            android:text="You saved: "
-                            android:textColor="@color/merun"
-                            android:textSize="14sp"
-
-
-                            />
-
-                        <TextView
-
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="10dp"
-                            android:id="@+id/totalsaved"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="100dp"
-                            android:gravity="start"
-                            android:maxLines="1"
-                            android:text=""
-                            android:textColor="@color/merun"
-                            android:textSize="14sp"
-
-                            />
-
                     </RelativeLayout>
                     <RelativeLayout>
 
@@ -441,11 +403,42 @@ android:layout_alignParentRight="true"
                             />
 
                     </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:backgroundTint="#B3DB143C"
+                        android:background="@drawable/button_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="23dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="20dp"
+                            android:gravity="start"
+                            android:maxLines="1"
+                            android:text="You saved: "
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            />
+                        <TextView
+                            android:textStyle="bold"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="10dp"
+                            android:id="@+id/totalsaved"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="100dp"
+                            android:gravity="start"
+                            android:maxLines="1"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
 
+                            />
 
-
-
-
+                    </RelativeLayout>
                 </TableLayout>
 
 
@@ -455,8 +448,8 @@ android:layout_alignParentRight="true"
 
     </androidx.cardview.widget.CardView>
     <TextView
-android:id="@+id/txtv6"
-android:layout_below="@+id/cardView4"
+        android:id="@+id/txtv6"
+        android:layout_below="@+id/cardView4"
         android:layout_width="match_parent"
         android:layout_height="5dp"
 
@@ -513,7 +506,7 @@ android:layout_below="@+id/cardView4"
                     android:text="Cash On Delivery"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                   />
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -616,20 +609,59 @@ android:layout_below="@+id/cardView4"
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+</LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/pgbarHome"
+        android:gravity="center"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/pgLoading"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/simplelocation" />
+    </LinearLayout>
 
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/placeOrder"
+        android:text="Place Order"
+        android:textSize="15sp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:background="@color/buttonBg"
+        android:layout_width="match_parent"
 
-   <androidx.appcompat.widget.AppCompatButton
-       android:id="@+id/placeOrder"
-       android:text="Place Order"
-       android:textSize="15sp"
-android:textAllCaps="false"
-       android:textColor="@color/white"
-       android:background="@color/buttonBg"
-       android:layout_width="match_parent"
-       android:layout_alignParentBottom="true"
-       android:layout_height="35dp">
+        android:layout_height="35dp">
 
-   </androidx.appcompat.widget.AppCompatButton>
+    </androidx.appcompat.widget.AppCompatButton>
+    <LinearLayout
+android:visibility="gone"
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/orderPlacing"
+        android:gravity="center"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.airbnb.lottie.LottieAnimationView
+
+
+            android:layout_centerInParent="true"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/orderplacing" />
+    </LinearLayout>
+
+
     </RelativeLayout>
 

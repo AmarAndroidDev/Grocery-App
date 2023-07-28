@@ -3,6 +3,7 @@ package com.example.groceryappp.Activity.ServiceFcm;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,10 +15,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import com.example.groceryappp.Activity.Activity.SellerOrderDetailsActivity;
+
 import com.example.groceryappp.Activity.Activity.UserOrderDetailsActivity;
-import com.example.groceryappp.Activity.Activity.UserOrderHeaderActivity;
-import com.example.groceryappp.Activity.Fragment.SellerOrderFragment;
 import com.example.groceryappp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -46,7 +45,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String notificationTitle = message.getData().get("notificationtitle");
             String notificationmessage = message.getData().get("notificationmessage");
             if (auth.getUid().equals(
-                    "YC7vLsrOpiVkMBqOcseWHL1BLTH3")) {
+                    "NAPuTkYOldg4M8FHUUwKeNvkBK73")) {
                 ShowNotification(orderId, buyeruid, sellerId, notificationTitle, notificationmessage, notificationType);
                 Log.d("mine", "onMessageReceived: " + message.getData().toString());
 
@@ -60,7 +59,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String notificationTitle = message.getData().get("notificationtitle");
             String notificationmessage = message.getData().get("notificationmessage");
             if (auth.getUid().equals(
-                    "YC7vLsrOpiVkMBqOcseWHL1BLTH3")) {
+                    "NAPuTkYOldg4M8FHUUwKeNvkBK73")) {
                 ShowNotification(orderId, buyeruid, sellerId, notificationTitle, notificationmessage, notificationType);
                 Log.d("mine", "onMessageReceived: " + message.getData().toString());
 
@@ -84,7 +83,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void ShowNotification(String orderId, String buyerId, String sellerId, String notificationTitle, String notificationMessage, String notificationType) {
-        manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         ////id required for notification random
         int id = new Random().nextInt();
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -94,7 +93,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 ////handel when user/seller click this notification navigate to orderdetails activity
         Intent intent = null;
         if (notificationType.equals("New Order")) {
-            intent = new Intent(this, SellerOrderDetailsActivity.class);
+        //    intent = new Intent(this, SellerOrderDetailsActivity.class);
             intent.putExtra("orderId", orderId);
 
 

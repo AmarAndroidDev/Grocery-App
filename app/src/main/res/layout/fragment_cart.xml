@@ -5,38 +5,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 android:background="@color/white"
-    tools:context=".Activity.Fragment.CartFragment">
+    tools:context="com.example.Fragment.CartFragment">
 
-
-    <LinearLayout
-android:layout_centerVertical="true"
-
-        android:id="@+id/emptycart"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiperRefresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-       >
-
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-
-            android:layout_marginRight="5dp"
-            android:background="@drawable/emptycart" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:maxLines="1"
-            android:text="Your Cart Is Empty"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="italic" />
+        android:layout_height="match_parent"
+        android:foregroundGravity="center">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-    </LinearLayout>
+
+
+            <RelativeLayout
+
+                android:layout_centerVertical="true"
+
+                android:id="@+id/emptycart"
+                android:layout_width="wrap_content"
+                android:layout_height="170dp"
+
+                android:layout_centerHorizontal="true"
+
+                android:orientation="vertical"
+                >
+
+                <com.airbnb.lottie.LottieAnimationView
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/emptycart" />
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:maxLines="1"
+                    android:text="Your cart is empty "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="italic" />
+
+
+            </RelativeLayout>
     <RelativeLayout
         android:visibility="gone"
 android:layout_marginTop="10dp"
@@ -137,5 +156,41 @@ android:layout_marginStart="5dp"
 </ScrollView>
 
 
+        </RelativeLayout>
 
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <LinearLayout
+
+        android:id="@+id/pgbarHome"
+        android:gravity="center"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/pgLoading"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/playballtypevegetable" />
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:background="@color/white"
+        android:id="@+id/checkingCrt"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_centerInParent="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/carttrailing" />
+    </LinearLayout>
 </RelativeLayout>

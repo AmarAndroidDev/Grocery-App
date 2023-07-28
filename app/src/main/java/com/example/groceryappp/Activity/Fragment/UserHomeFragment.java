@@ -1,63 +1,80 @@
 package com.example.groceryappp.Activity.Fragment;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
+import static com.example.groceryappp.Activity.Utills.SharedPreferenceManager.SELLER_CATEGORY_PREF_NAME;
+import static com.example.groceryappp.Activity.Utills.SharedPreferenceManager.SINGLE_PRODCT_PREF_NAME;
+import static com.example.groceryappp.Activity.Utills.SharedPreferenceManager.USER_INFO_PREF_NAME;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.groceryappp.Activity.Activity.ViewAllActivity;
 import com.example.groceryappp.Activity.Adapter.HeadLineCircular;
 import com.example.groceryappp.Activity.Adapter.MixVegPriceDetails;
 import com.example.groceryappp.Activity.Adapter.ViewPagerAdapter;
-import com.example.groceryappp.Activity.AllModel.Headline;
 import com.example.groceryappp.Activity.AllModel.SingleProductDetails;
+import com.example.groceryappp.Activity.AllModel.UserInfo;
+import com.example.groceryappp.Activity.AllModel.ViewPagerModel;
+import com.example.groceryappp.Activity.Firebase.FirebaseClient;
+import com.example.groceryappp.Activity.Utills.DataManagementUtils;
+import com.example.groceryappp.Activity.Utills.DeleteDataWorker;
+import com.example.groceryappp.Activity.Utills.FirebaseCallback;
+import com.example.groceryappp.Activity.Utills.SharedPreferenceManager;
+import com.example.groceryappp.Activity.Utills.SharedPreferencesWorker;
 import com.example.groceryappp.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.tabs.TabLayout;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class UserHomeFragment extends Fragment {
-    TabLayout tableLayout;
-    ViewPager pager2;
-    DotsIndicator indicator;
-    ArrayList<Integer> listviewpager;
+    private static final String PREFS_NAME = "MyPrefsFile";
+    private static final String KEY_FIRST_LAUNCH = "firstLaunch";
+    private ImageView profilePic;
+    private UserInfo listInfo;
+    private ProgressBar pgbar;
+    private AppCompatEditText search;
 
+    private TextView deliveryadress;
+    private ViewPager pager2;
 
+    private DotsIndicator indicator;
+    private ArrayList<ViewPagerModel> listviewpager;
     private RecyclerView vegHeadline, allvegDeatails;
-    private ArrayList<Headline> list;
-
+    private ArrayList<SingleProductDetails> list;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private ArrayList<SingleProductDetails> list2;
-
-    Dialog dialog;
-    FirebaseFirestore database;
-    FirebaseAuth auth;
-    MixVegPriceDetails vegtableAdapter;
-    private ImageView back, cart, profile;
-    private List<DocumentSnapshot> listSize;
+    private MixVegPriceDetails vegtableAdapter;
     private HeadLineCircular adapter;
-
+    private boolean isCacheAvailable = false;
+   private SharedPreferences preferences;
+    private SharedPreferenceManager sharedPreferenceManager;
 
     public UserHomeFragment() {
         // Required empty public constructor
@@ -69,91 +86,155 @@ public class UserHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_home, container, false);
         initilizeView(view);
-        database = FirebaseFirestore.getInstance();
 
-        auth = FirebaseAuth.getInstance();
         //adding viewpager
-
-        listviewpager=new ArrayList<>();
-        listviewpager.add(R.drawable.img_7);
-        listviewpager.add(R.drawable.img_10);
-        listviewpager.add(R.drawable.tomatofinal);
-
-        listviewpager.add(R.drawable.img_8);
-        listviewpager.add(R.drawable.img_9);
-
-        fetchingItemsOfSeller();
-        fetchingCtegoryItemOfSeller();
-        pager2.setAdapter(new ViewPagerAdapter(getContext(),listviewpager));
-        indicator.attachTo(pager2);
-      /*  dialog=new Dialog(getContext());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
-        dialog.show();
-        new CountDownTimer(2000,1000){
-
-            @Override
-            public void onTick(long l) {
-
-            }
-
-            @Override
-            public void onFinish() {
-dialog.dismiss();
-            }
-        }.start();*/
-
-
-
-      /*  cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), CartActivity.class);
-                intent.putExtra("cartSize", listSize.size());
-                startActivity(intent);
-            }
-        });*/
-       /* profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), ProfileActivity.class));
-            }
-        });*/
-
-
+        listviewpager = new ArrayList<>();
         list2 = new ArrayList<>();
-        vegtableAdapter = new MixVegPriceDetails(getContext(), list2);
-        allvegDeatails.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        allvegDeatails.setAdapter(vegtableAdapter);
-
-
-
+        listviewpager.add(new ViewPagerModel(R.drawable.img_10,""));
+        listviewpager.add(new ViewPagerModel(R.drawable.banner1,""));
+        listviewpager.add(new ViewPagerModel(R.drawable.img_5,""));
+        listviewpager.add(new ViewPagerModel(R.drawable.img_6,""));
+        listviewpager.add(new ViewPagerModel(R.drawable.img_7,""));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+            view.findViewById(R.id.pgbarHome).setVisibility(View.GONE);
+            }
+        },1000);
+        swipeRefreshLayout = view.findViewById(R.id.swipe);
+        swipeRefreshLayout.setColorSchemeColors(getContext().getColor(R.color.buttonBg));
+        // swipeRefreshLayout.setProgressBackgroundColorSchemeColor(getContext().getColor(R.color.bg2));
         list = new ArrayList<>();
-
-
-
         vegHeadline.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         adapter = new HeadLineCircular(list, getContext());
         vegHeadline.setAdapter(adapter);
+        vegtableAdapter = new MixVegPriceDetails(getContext(), list2, null);
+        allvegDeatails.setAdapter(vegtableAdapter);
+        allvegDeatails.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        sharedPreferenceManager = SharedPreferenceManager.getInstance(getContext());
+ preferences = getContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE);
+        if (sharedPreferenceManager != null && preferences.contains(SELLER_CATEGORY_PREF_NAME)) {
+            list = sharedPreferenceManager.retrieveSingleProductSharedP(getContext(), SELLER_CATEGORY_PREF_NAME);
+            adapter = new HeadLineCircular(list, getContext());
+            vegHeadline.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
+        } else {
+            fetchingCtegoryItemOfSeller();
+
+        }
+        if (sharedPreferenceManager != null && preferences.contains("product list")) {
+            list2 = sharedPreferenceManager.retrieveSingleProductSharedP(getContext(), "product list");
+            vegtableAdapter = new MixVegPriceDetails(getContext(), list2, null);
+            allvegDeatails.setAdapter(vegtableAdapter);
+            vegtableAdapter.notifyDataSetChanged();
+
+        } else {
+            fetchingItemsOfSeller();
+
+        }
+        if (sharedPreferenceManager != null && preferences.contains(USER_INFO_PREF_NAME)) {
+            listInfo = sharedPreferenceManager.retrieveUserInfoSharedP(getContext(), USER_INFO_PREF_NAME);
+            deliveryadress.setText(listInfo.getCity() + "," + listInfo.getPincode());
+            if (listInfo.getProfilePic() != null) {
+                Glide.with(getContext()).load(listInfo.getProfilePic()).into(profilePic);
+                pgbar.setVisibility(View.GONE);
+            } else {
+                pgbar.setVisibility(View.GONE);
+            }
+
+        } else {
+            getingUserDetails(view);
+
+        }
+
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getingUserDetails(view);
+                fetchingItemsOfSeller();
+                fetchingCtegoryItemOfSeller();
+                swipeRefreshLayout.setRefreshing(false);
+                // Perform your refresh action here
+              /*  new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Stop the refreshing animation
+
+                    }
+                }, 2000);*/
+            }
+        });
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ViewAllActivity.class);
+                intent.putExtra("listProduct", list2);
+                startActivity(intent);
+            }
+        });
+
+        // getingUserDetails(view);
+        ////fetching address details
+
+        pager2.setAdapter(new ViewPagerAdapter(getContext(), listviewpager));
+        indicator.attachTo(pager2);
+
+
+
+
+
+     /*   new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                view.findViewById(R.id.pgbar33).setVisibility(View.GONE);
+            }
+        }, 1000);
+*/
         return view;
     }
-    private void loadingProgrgessBar() {
 
+    private void getingUserDetails(View view) {
+        String userId=null;
+        if (sharedPreferenceManager != null && preferences.contains("USER_ID")) {
+             userId=SharedPreferenceManager.getInstance(getContext()).getUserId();
+        }
 
+        if (userId!= null) {
+            FirebaseClient.getInstance().collection("CurrentUser").document(userId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    listInfo = documentSnapshot.toObject(UserInfo.class);
+                    deliveryadress.setText(listInfo.getCity() + "," + listInfo.getPincode());
+                    if (listInfo.getProfilePic() != null) {
+                        Glide.with(getContext()).load(listInfo.getProfilePic()).into(profilePic);
+                        pgbar.setVisibility(View.GONE);
+                    } else {
+                        pgbar.setVisibility(View.GONE);
+                    }
+
+                   // sharedPreferenceManager.storeUserInfoDetailsinSharedP(listInfo, getContext(), SharedPreferenceManager.USER_INFO_PREF_NAME);
+                }
+            });
+        } else {
+            view.findViewById(R.id.txt).setVisibility(View.GONE);
+            view.findViewById(R.id.deliveryAd).setVisibility(View.GONE);
+            view.findViewById(R.id.realay).setVisibility(View.GONE);
+
+        }
 
     }
 
-      private void initilizeView(View view) {
-        vegHeadline=view.findViewById(R.id.rcv_vegHeadline);
-
-        allvegDeatails=view.findViewById(R.id.rcv_allveg);
-          pager2=view.findViewById(R.id.viewpager1);
-          indicator=view.findViewById(R.id.dots_indicator);
-       // back=view.findViewById(R.id.back);
-      //  profile=view.findViewById(R.id.profile);
-
-
-
+    private void initilizeView(View view) {
+        vegHeadline = view.findViewById(R.id.rcv_vegHeadline);
+        allvegDeatails = view.findViewById(R.id.rcv_allveg);
+        pager2 = view.findViewById(R.id.viewpager1);
+        indicator = view.findViewById(R.id.dots_indicator);
+        deliveryadress = view.findViewById(R.id.deliveryAd);
+        profilePic = view.findViewById(R.id.profile_pic);
+        search = view.findViewById(R.id.search);
+        pgbar = view.findViewById(R.id.pgbar);
 
     }
 
@@ -161,58 +242,114 @@ dialog.dismiss();
     public void onResume() {
         super.onResume();
 
+    }
 
+    private void fetchingItemsOfSeller() {
+        FirebaseCallback.fetchProductDetailsFromFirebase("NAPuTkYOldg4M8FHUUwKeNvkBK73", "All Item", getContext(), new FirebaseCallback() {
+            @Override
+            public void onCallback(ArrayList<SingleProductDetails> productDetails) {
+                list2.addAll(productDetails);
+                vegtableAdapter.notifyDataSetChanged();
+                // storeSingleProductDetailsinSharedP(list2);
+               // sharedPreferenceManager.storeSingleProductDetailsinSharedP(list2, getContext(), SINGLE_PRODCT_PREF_NAME);
+
+            }
+
+            @Override
+            public void onCallbackInfo(ArrayList<UserInfo> info) {
+
+            }
+        });
         vegtableAdapter.notifyDataSetChanged();
 
     }
 
-    private void fetchingItemsOfSeller(){
-        database.collection("CurrentUser").document("YC7vLsrOpiVkMBqOcseWHL1BLTH3").collection("All Item").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                                                                       @Override
-                                                                                                       public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                                                                           for (QueryDocumentSnapshot q : task.getResult()) {
-                                                                                                               SingleProductDetails singleProductDetails = q.toObject(SingleProductDetails.class);
-                                                                                                               list2.add(singleProductDetails);
-                                                                                                               // list2.add(new SingleProductDetails(q.get("Name").toString(),  q.get("price").toString(),q.get("qty").toString()));
-
-                                                                                                           }
-
-                                                                                                           vegtableAdapter.notifyDataSetChanged();
-
-
-                                                                                                       }
-                                                                                                   }
-        ).addOnFailureListener(new OnFailureListener() {
+    private void fetchingCtegoryItemOfSeller() {
+        FirebaseCallback.fetchProductDetailsFromFirebase("NAPuTkYOldg4M8FHUUwKeNvkBK73", "Category", getContext(), new FirebaseCallback() {
             @Override
-            public void onFailure(@NonNull Exception e) {
+            public void onCallback(ArrayList<SingleProductDetails> productDetails) {
+                list.addAll(productDetails);
+                adapter.notifyDataSetChanged();
 
-                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                //sharedPreferenceManager.storeSingleProductDetailsinSharedP(productDetails, getContext(), SELLER_CATEGORY_PREF_NAME);
+            }
+
+            @Override
+            public void onCallbackInfo(ArrayList<UserInfo> info) {
+
             }
         });
 
     }
 
-    private void fetchingCtegoryItemOfSeller(){
-        database.collection("Category").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                                        @Override
-                                                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                                            for (QueryDocumentSnapshot q : task.getResult()) {
-                                                                                // SingleProductDetails singleProductDetails=q.toObject(SingleProductDetails.class)
-                                                                                //  list2.add(singleProductDetails);
-                                                                                list.add(new Headline(q.get("name").toString(),q.get("type").toString(),q.get("img").toString()));
+    public void storeSingleProductDetailsinSharedP(ArrayList<SingleProductDetails> data) {
+        // Get the SharedPreferences instance
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE);
+        // Create a SharedPreferences.Editor
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        // Convert the list of data into a JSON string
+        Gson gson = new Gson();
+        String json = gson.toJson(data);
+        // Put the JSON string into SharedPreferences
+        editor.putString("list", json);
 
-                                                                            }
-                                                                            adapter.notifyDataSetChanged();
+        // Apply the changes to persist the data
+        editor.apply();
+        Toast.makeText(getContext(), "sucess store", Toast.LENGTH_SHORT).show();
 
-                                                                        }
-                                                                    }
-        ).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
+    public ArrayList<SingleProductDetails> retrieveSingleProductSharedP() {
+        // Get the SharedPreferences instance
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE);
+
+        // Retrieve the JSON string from SharedPreferences
+        String json = sharedPreferences.getString("list", "");
+
+        // Convert the JSON string back to a list of data
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<SingleProductDetails>>() {
+        }.getType();
+        ArrayList<SingleProductDetails> data = gson.fromJson(json, type);
+        Toast.makeText(getContext(), "sucess retrive", Toast.LENGTH_SHORT).show();
+        // Return the list of data
+        return data;
+
+    }
+
+
+
+    @Override
+    public void onDestroy() {
+
+      /*  preferences=getContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("product list");
+        editor.remove("sellerCategory");
+        editor.apply();
+        Toast.makeText(getContext(), "remove", Toast.LENGTH_SHORT).show();*/
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+
+        super.onDestroyView();
+    }
+
+
+    /*    private void deleteSharedPreference() {
+                    // Get access to the SharedPreferences
+                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE);
+                    // Clear the data from SharedPreferences
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.remove("list");
+                    editor.apply();
+                    Toast.makeText(getContext(), "Sucess", Toast.LENGTH_SHORT).show();
+                }*/
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.e("frag", "pauseHome");
+    }
 }

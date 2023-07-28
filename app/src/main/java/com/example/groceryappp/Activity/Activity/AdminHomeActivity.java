@@ -1,79 +1,131 @@
 package com.example.groceryappp.Activity.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.groceryappp.Activity.Fragment.PrdouctFragment;
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+
+import com.example.groceryappp.Activity.Fragment.AdminOrderFragment;
+import com.example.groceryappp.Activity.Fragment.AdminProductFragment;
+import com.example.groceryappp.Activity.Fragment.CartFragment;
+
 import com.example.groceryappp.Activity.Fragment.ProfileFragment;
-import com.example.groceryappp.Activity.Fragment.SellerOrderFragment;
+
+import com.example.groceryappp.Activity.Fragment.UserHomeFragment;
 import com.example.groceryappp.R;
-import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class AdminHomeActivity extends AppCompatActivity {
-private boolean available=false;
-    private ViewPager2 pager2;
-    private TabLayout layoout;
-    CardView orders,product;
-    ImageView edtProfile,search;
+    private MeowBottomNavigation bottomNavigation;
+    private boolean isHomeDoubleClick = false;
+    private boolean isProfileDoubleClick = false;
+    private boolean isCartDoubleClick = false;
 
-    private TextView shopStatus;
-    private SwitchCompat btnSwitch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
         getSupportActionBar().hide();
         viewInitialize();
-        edtProfile.setOnClickListener(new View.OnClickListener() {
+
+            replaceFragment(new AdminProductFragment(), 0, null);
+
+        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.profilee));
+        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.baseline_house_24));
+        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.baseline_shopping_cart_checkout_24));
+
+
+        bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AdminHomeActivity.this, ProfileFragment.class);
-                intent.putExtra("userType", "seller");
-                startActivity(new Intent(intent));
+            public void onClickItem(MeowBottomNavigation.Model item) {
+                switch (item.getId()) {
+                    case 1:
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("USER_TYPE", "Seller");
+                        replaceFragment(new ProfileFragment(), 2, bundle);
+                        isProfileDoubleClick = true;
+                        break;
+                    case 2:
+                        replaceFragment(new AdminProductFragment(), 0, null);
+                        isHomeDoubleClick = true;
+                        break;
+                    case 3:
+                        replaceFragment(new AdminOrderFragment(), 1, null);
+                        isCartDoubleClick = true;
+                        break;
+                }
             }
         });
-
-        search.setOnClickListener(new View.OnClickListener() {
+        bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AdminHomeActivity.this, AdminSearchActivity.class));
+            public void onReselectItem(MeowBottomNavigation.Model item) {
+                switch (item.getId()) {
+                    case 1:
+                        if (!isProfileDoubleClick) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("USER_TYPE", "User");
+                            replaceFragment(new ProfileFragment(), 2, bundle);
+                            isProfileDoubleClick = true;
+                            break;
+                        } else {
+                            break;
+                        }
+                    case 2:
+                        if (!isHomeDoubleClick) {
+                            replaceFragment(new UserHomeFragment(), 0, null);
+                            isHomeDoubleClick = true;
+                            break;
+                        } else {
+                            break;
+                        }
+                    case 3:
+                        if (!isCartDoubleClick) {
+                            replaceFragment(new AdminOrderFragment(), 1, null);
+                            isCartDoubleClick = true;
+                            break;
+                        } else {
+                            break;
+                        }
+
+                }
             }
         });
-        //checking shop open or not;
-        SharedPreferences sharedPreferences = getSharedPreferences("ShopStatus", MODE_PRIVATE);
-if (sharedPreferences.contains("status")){
-    String value= sharedPreferences.getString("status",null);
-
-    if (value.equals("Shop Open")){
-        btnSwitch.setChecked(true);
-    }else {
-        btnSwitch.setChecked(false);
-    }
-}else
-    btnSwitch.setChecked(false);
-  /* btnSwitch.setChecked(true);
-        shopStatus.setText("Shop open");
-        shopStatus.setTextColor(Color.WHITE);
-*/
+        bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
+            @Override
+            public void onShowItem(MeowBottomNavigation.Model item) {
+                switch (item.getId()) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                }
+            }
+        });
 
 
         final String FCM_TOPIC = "PUSH_NOTIFICATIONs";
@@ -89,115 +141,51 @@ if (sharedPreferences.contains("status")){
 
             }
         });
-///////////calling product fraagment
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.add(R.id.rooot_layout, new PrdouctFragment()).commit();
-
-        /*String [] Title={"PRODUCT","ORDER","PROFILE"};
-        pager2.setAdapter(new FragmentAdapter(AdminHomeActivity.this));
-        ///////  ((tab, position) ->tab.setText(Title[position]) )///we can pass this new 3 rd parameter
-        new TabLayoutMediator(layoout, pager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(Title[position]);
-
-            }
-        }).attach();
-*/
-
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.root_layout, new PrdouctFragment()).commit();
-        orders.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                findViewById(R.id.root_layout).setVisibility(View.GONE);
-                findViewById(R.id.order_layout).setVisibility(View.VISIBLE);
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.order_layout, new SellerOrderFragment()).commit();
-
-
-            }
-        });
-        product.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                findViewById(R.id.root_layout).setVisibility(View.VISIBLE);
-                findViewById(R.id.order_layout).setVisibility(View.GONE);
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.root_layout, new PrdouctFragment()).commit();
-
-            }
-        });
-        btnSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences preferences = getSharedPreferences("Shop Status", MODE_PRIVATE);
-                if (preferences.contains("status")) {
-                    String status = preferences.getString("status", "");
-                    if (status.equals("Shop Closed")) {
-                        showDialoggg("Want to close Shop", "Shop Closed");
-
-                    } else if (status.equals("Shop Open")) {
-                        showDialoggg("Want to open Shop", "Shop Open");
-                    }
-
-
-                }
-
-             showDialoggg("Shop Open","Shop Open");
-
-            }
-        });
     }
 
-    private void showDialoggg(String title,String textstatus) {
-        AlertDialog.Builder dialog=new AlertDialog.Builder(AdminHomeActivity.this).setCancelable(false);
-        dialog.setMessage("Are you sure ?").setTitle(title).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                shopStatus.setText(textstatus);
-                SharedPreferences sharedPreferences=getSharedPreferences("Shop Status",MODE_PRIVATE);
-                SharedPreferences.Editor editor=sharedPreferences.edit();
-                editor.putString("status",textstatus);
-                editor.apply();
-            }
-        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        }).show();
+    private void viewInitialize() {
+        bottomNavigation = findViewById(R.id.bottomNavigation);
+
+    }
+
+    private void replaceFragment(Fragment fragment, int flag, Bundle bundle) {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        if (flag == 0) {
+            transaction.add(R.id.root_Layout, fragment).addToBackStack(null);
+        }
+        if (flag == 2) {
+            fragment.setArguments(bundle);
+            transaction.replace(R.id.root_Layout, fragment).addToBackStack(null);
+        } else {
+            transaction.replace(R.id.root_Layout, fragment).addToBackStack(null);
+        }
+
+        transaction.commit();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 
     @Override
     protected void onResume() {
-
-
         super.onResume();
+        String who = getIntent().getStringExtra("WHO");
+        if (who != null) {
+            if (who.equals("profile")) {
+                Bundle bundle = new Bundle();
+                bundle.putString("USER_TYPE", "Seller");
+                replaceFragment(new ProfileFragment(), 2, bundle);
 
-
-        SharedPreferences sharedPreferences=getSharedPreferences("ShopStatus",MODE_PRIVATE);
-        if (sharedPreferences.contains("shopOpen")){
-            if (sharedPreferences.getBoolean("shopOpen",true)){
-                shopStatus.setText("Shop open");
-                shopStatus.setTextColor(Color.WHITE);
             }
-            shopStatus.setText("shop closed");
-            shopStatus.setTextColor(Color.BLACK);
+            if (who.equals("admin_order")) {
+                replaceFragment(new AdminOrderFragment(), 1, null);
+            }
         }
-        else {
 
-        }
     }
-    private void viewInitialize() {
-        orders=findViewById(R.id.orders);
-        product=findViewById(R.id.product);
-        edtProfile=findViewById(R.id.edit_profile);
-        btnSwitch=findViewById(R.id.switch_btn);
-        shopStatus=findViewById(R.id.shop_status);
-        search=findViewById(R.id.search);
-    }
-
-
 }

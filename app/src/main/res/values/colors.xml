@@ -10,19 +10,28 @@
     <color name="fedwhite">#AFAFAF</color>
     <color name="fullfedwhite">#D6D2D2</color>
     <color name="white">#FFFF</color>
+    <color name="yellowCustom">#fbbc09</color>
+    <color name="yellowCustom2">#ffd401</color>
+    <color name="colorQrScan">#990A0A0A</color>
     <color name="lightWhite">#B3EDEADF</color>
     <color name="bg1">#03DAC5</color>
+ <!--   <color name="greenBg">#008000</color>-->
     <color name="greenBg">#008000</color>
-    <color name="darkGreen">#023020</color>
+    <color name="darkGreen">#B3008000</color>
+   <!-- <color name="bg2">#009E60</color>-->
     <color name="bg2">#009E60</color>
     <color name="buttonBg">#19543E</color>
+    <color name="buttonBglight">#80195441</color>
     <color name="lightbg2">#80228C22</color>
     <color name="greenborder">	#3CB371</color>
+
+    <color name="gray">#808080</color>
     <color name="grey">#E5E4E2</color>
     <color name="lightgreen">#00FF7F</color>
     <color name="boxbackground">#33B3B3B3</color>
     <color name="lightgreenBg">#B3228C22</color>
     <color name="fulllightgreenBg">#4D228C22</color>
+    <color name="yellow">#FFA000</color>
 
 
     <color name="merun">#DC143C</color>

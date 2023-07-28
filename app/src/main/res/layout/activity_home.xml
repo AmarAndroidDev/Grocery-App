@@ -7,10 +7,13 @@
     android:orientation="vertical"
 
     tools:context=".Activity.Activity.HomeActivity">
+
+
+
     <RelativeLayout
-        android:visibility="gone"
-        android:layout_above="@+id/bottomNavigation"
-android:id="@+id/cart"
+        android:id="@+id/cart_layout"
+
+android:layout_above="@+id/bottomNavigationnn"
         android:backgroundTint="#FFFF"
         android:background="@drawable/greenroundbg50radius"
 
@@ -18,7 +21,7 @@ android:id="@+id/cart"
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/cart_layout"
+
            android:backgroundTint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -29,342 +32,14 @@ android:id="@+id/cart"
 
         </RelativeLayout>
 
-    </RelativeLayout>
-    <RelativeLayout
 
-        android:layout_above="@+id/bottomNavigation"
-        android:id="@+id/toolbar"
-        android:background="@color/bg2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <TextView
-            android:id="@+id/demo"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:text="Delivery Here"
-            android:textStyle="italic"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/deliveryAd"
-            android:drawableStart="@drawable/baseline_location_on_24"
-            android:layout_below="@+id/demo"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="2dp"
-            android:text=""
-
-            android:textSize="14sp"
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-<de.hdodenhof.circleimageview.CircleImageView
-    android:id="@+id/profile_pic"
-    android:layout_marginTop="10dp"
-    android:layout_alignParentRight="true"
-    android:layout_marginEnd="30dp"
-app:civ_border_width="1.5dp"
-    app:civ_border_color="@color/white"
-    android:layout_width="40dp"
-    android:layout_height="40dp"
-    android:background="@drawable/profilee"
-    />
-        <androidx.appcompat.widget.AppCompatEditText
-android:layout_marginTop="10dp"
-            android:editable="false"
-            android:backgroundTint="@color/white"
-            android:layout_below="@+id/deliveryAd"
-            android:id="@+id/search"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-        android:background="@drawable/round_bg"
-            android:drawableLeft="@drawable/baseline_search_24"
-            android:drawablePadding="5dp"
-            android:gravity="center_vertical"
-android:paddingStart="10dp"
-            android:hint="Search Item..."
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-        <RelativeLayout
-
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/search"
-android:backgroundTint="#FFFF"
-            android:background="@drawable/greenroundbg50radius"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RelativeLayout
-
-                android:id="@+id/root_layout"
-android:backgroundTint="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/greenroundbg50radius">
-
-            </RelativeLayout>
-
-        </RelativeLayout>
 
     </RelativeLayout>
-
-
-
-   <!-- <Toolbar
-
-        android:id="@+id/tool"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bg2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-
-                android:id="@+id/img"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-
-
-                android:background="@drawable/shop" />
-
-            <TextView
-                android:id="@+id/Title"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/img"
-                android:drawablePadding="10dp"
-                android:text="Sahoo Vegetable"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cartSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginEnd="70dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/merun"
-
-                android:visibility="gone"
-                app:cardCornerRadius="18dp"
-
-                >
-
-                <TextView
-                    android:id="@+id/size"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-
-                    />
-            </androidx.cardview.widget.CardView>
-
-
-            <ImageView
-                android:id="@+id/edit_profile"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/baseline_account_circle_24" />
-
-            <ImageView
-                android:id="@+id/cart"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="12dp"
-                android:layout_marginRight="60dp"
-                android:background="@drawable/cart"
-                android:backgroundTint="@color/white" />
-
-
-            <TextView
-                android:id="@+id/delivery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Title"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:drawableLeft="@drawable/bike2"
-                android:drawablePadding="5dp"
-                android:drawableTint="@color/black"
-                android:text="Express Home Delivery"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:textStyle="italic" />
-
-            <TextView
-                android:id="@+id/addelivery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/delivery"
-
-                android:layout_marginLeft="5dp"
-
-                android:textColor="@color/white"
-                android:textSize="14sp"
-
-                />
-
-
-        </RelativeLayout>
-
-
-    </Toolbar>
-
-
-    <LinearLayout
-
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@id/tool"
-
-        android:background="@color/bg2"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tool">
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-
-            android:elevation="60dp"
-
-            app:cardCornerRadius="20dp"
-            app:cardElevation="10dp"
-            app:contentPadding="5dp">
-
-
-            <TextView
-                android:id="@+id/search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:background="#FFFFFF"
-                android:drawableLeft="@drawable/baseline_search_24"
-                android:drawablePadding="5dp"
-                android:gravity="start"
-
-                android:hint="Search Item"
-                android:maxLines="1"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-        </androidx.cardview.widget.CardView>
-
-
-        &lt;!&ndash; <androidx.cardview.widget.CardView
-             android:id="@+id/cartt"
-             android:layout_width="match_parent"
-             android:layout_height="35dp"
-             android:layout_marginStart="7.5dp"
-
-             android:layout_marginTop="5dp"
-             android:layout_marginEnd="15dp"
-             android:layout_weight="1"
-
-             app:cardCornerRadius="15dp"
-             app:cardElevation="10dp"
-             app:contentPadding="5dp">
-             <RelativeLayout
-                 android:layout_gravity="center"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content">
-
-
-
-
-             <TextView
-                 android:id="@+id/price_PDA"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_gravity="center"
-
- android:drawableLeft="@drawable/baseline_shopping_cart_24"
-                 android:maxLines="1"
-                 android:drawablePadding="5dp"
-                 android:text="Cart"
-                 android:textColor="@color/black"
-                 android:textSize="18sp"
-
-                 android:textStyle="bold" />
-             </RelativeLayout>
-         </androidx.cardview.widget.CardView>&ndash;&gt;
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/root_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/linearLayout4"
-
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
-
-    <LinearLayout
-        android:id="@+id/root_layout_cart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="55dp"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />-->
-
 
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
 android:layout_alignParentBottom="true"
         android:background="@drawable/profile_setting_green"
-     android:id="@+id/bottomNavigation"
+     android:id="@+id/bottomNavigationnn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -378,5 +53,15 @@ android:layout_alignParentBottom="true"
         app:mbn_rippleColor="@color/grey"
         app:mbn_selectedIconColor="@color/buttonBg"
         app:mbn_shadowColor="@color/white" />
+    <ProgressBar
+android:visibility="gone"
+        android:id="@+id/pgbar"
+android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
 
 </RelativeLayout>
