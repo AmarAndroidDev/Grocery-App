@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+app:cardCornerRadius="15dp"
+
+app:cardElevation="3dp"
+    android:layout_margin="5dp"
+    android:id="@+id/root_layout_profile"
+    >
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+       >
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:background="@color/gray"
+        android:id="@+id/profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+     android:layout_marginTop="7dp"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/black"
+        android:layout_marginStart="7dp"
+
+        android:layout_marginEnd="7dp"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<RelativeLayout
+    android:orientation="vertical"
+
+
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    >
+    <TextView
+
+        android:background="@drawable/wave__6_"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:backgroundTint="@color/gray"
+
+        android:textColor="@color/black"
+
+        android:layout_gravity="bottom"
+
+
+        android:layout_width="match_parent"
+        android:maxLines="1"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:textSize="10sp"
+
+      android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <TextView
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:id="@+id/profile_title"
+        android:layout_alignParentBottom="true"
+        android:textSize="10sp"
+android:layout_marginBottom="3dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="11dp"/>
+
+</RelativeLayout>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -24,7 +24,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +45,7 @@ import com.example.groceryappp.Activity.Utills.FirebaseCallback;
 import com.example.groceryappp.Activity.Utills.SharedPreferenceManager;
 import com.example.groceryappp.Activity.Utills.SharedPreferencesWorker;
 import com.example.groceryappp.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -59,7 +62,10 @@ public class UserHomeFragment extends Fragment {
     private ImageView profilePic;
     private UserInfo listInfo;
     private ProgressBar pgbar;
+    private LinearLayout mainLayout;
+
     private AppCompatEditText search;
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     private TextView deliveryadress;
     private ViewPager pager2;
@@ -95,12 +101,10 @@ public class UserHomeFragment extends Fragment {
         listviewpager.add(new ViewPagerModel(R.drawable.img_5,""));
         listviewpager.add(new ViewPagerModel(R.drawable.img_6,""));
         listviewpager.add(new ViewPagerModel(R.drawable.img_7,""));
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-            view.findViewById(R.id.pgbarHome).setVisibility(View.GONE);
-            }
-        },1000);
+
+
+        shimmerFrameLayout.startShimmer();
+
         swipeRefreshLayout = view.findViewById(R.id.swipe);
         swipeRefreshLayout.setColorSchemeColors(getContext().getColor(R.color.buttonBg));
         // swipeRefreshLayout.setProgressBackgroundColorSchemeColor(getContext().getColor(R.color.bg2));
@@ -108,7 +112,7 @@ public class UserHomeFragment extends Fragment {
         vegHeadline.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         adapter = new HeadLineCircular(list, getContext());
         vegHeadline.setAdapter(adapter);
-        vegtableAdapter = new MixVegPriceDetails(getContext(), list2, null);
+        vegtableAdapter = new MixVegPriceDetails(getContext(), list2);
         allvegDeatails.setAdapter(vegtableAdapter);
         allvegDeatails.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         sharedPreferenceManager = SharedPreferenceManager.getInstance(getContext());
@@ -125,7 +129,7 @@ public class UserHomeFragment extends Fragment {
         }
         if (sharedPreferenceManager != null && preferences.contains("product list")) {
             list2 = sharedPreferenceManager.retrieveSingleProductSharedP(getContext(), "product list");
-            vegtableAdapter = new MixVegPriceDetails(getContext(), list2, null);
+            vegtableAdapter = new MixVegPriceDetails(getContext(), list2);
             allvegDeatails.setAdapter(vegtableAdapter);
             vegtableAdapter.notifyDataSetChanged();
 
@@ -235,6 +239,9 @@ public class UserHomeFragment extends Fragment {
         profilePic = view.findViewById(R.id.profile_pic);
         search = view.findViewById(R.id.search);
         pgbar = view.findViewById(R.id.pgbar);
+        mainLayout = view.findViewById(R.id.pgbarHome);
+
+        shimmerFrameLayout = view.findViewById(R.id.shimmer_container);
 
     }
 
@@ -252,6 +259,8 @@ public class UserHomeFragment extends Fragment {
                 vegtableAdapter.notifyDataSetChanged();
                 // storeSingleProductDetailsinSharedP(list2);
                // sharedPreferenceManager.storeSingleProductDetailsinSharedP(list2, getContext(), SINGLE_PRODCT_PREF_NAME);
+                shimmerFrameLayout.stopShimmer();
+                mainLayout.setVisibility(View.GONE);
 
             }
 

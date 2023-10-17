@@ -22,4 +22,30 @@ public class ProgressDialogUtils {
             progressDialog = null;
         }
     }
+    public Boolean isEvenNumber(int  input){
+        if (input % 2==0){
+            return true;
+        }
+        return false;
+    }
+    public Boolean isOddNumber(int  input){
+        if (input % 2!=0){
+            return true;
+        }
+        return false;
+    }
+    public String isValidPassword(String inputPas){
+       try {
+          if (inputPas.isEmpty()){
+              throw new IllegalArgumentException("Null pointer Exception");
+
+          }
+          if (inputPas.length()>=6 &&inputPas.length()<=15){
+              return "Valid password";
+          }
+       }catch (Exception e){
+throw e;
+       }
+       return "Wrong Password";
+    }
 }

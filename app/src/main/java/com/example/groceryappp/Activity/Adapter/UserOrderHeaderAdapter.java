@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,7 @@ public class UserOrderHeaderAdapter extends RecyclerView.Adapter<UserOrderHeader
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+     animationRcv(holder.itemView);
         header = list.get(holder.getAdapterPosition());
         holder.orderId.setText(header.getOrderId());
         holder.name.setText(header.getName());
@@ -114,5 +116,10 @@ holder.viewDetails.setOnClickListener(new View.OnClickListener() {
 
 
         }
+    }
+    private void animationRcv(View view){
+        AlphaAnimation animation=new AlphaAnimation(0.0f,1.5f);
+        animation.setDuration(1500);
+        view.startAnimation(animation);
     }
 }

@@ -40,13 +40,13 @@ public class MixVegPriceDetails extends RecyclerView.Adapter<MixVegPriceDetails.
     private Context context;
     private FirebaseFirestore database;
 
-    private ProgressBar pgbar;
+
     private String userId;
 
-    public MixVegPriceDetails(Context context, ArrayList<SingleProductDetails> list,ProgressBar pgbar) {
+    public MixVegPriceDetails(Context context, ArrayList<SingleProductDetails> list) {
         this.context = context;
         this.list = list;
-        this.pgbar = pgbar;
+
     }
 
     @NonNull
@@ -72,17 +72,19 @@ public class MixVegPriceDetails extends RecyclerView.Adapter<MixVegPriceDetails.
         float discountPrice = list.get(position).getMarktPrice() - list.get(position).getPrice();
         float offerPercent = discountPrice * 100 / list.get(position).getMarktPrice();
         holder.offerPrice.setText(Math.round(offerPercent) + "% Off");
-        holder.title.setText(details.getName());
+
+        if (details.getName().length()>8){
+            holder.title.setText(details.getName().substring(0,6)+"..");
+        }else {
+            holder.title.setText(details.getName());
+        }
         holder.price.setText("₹" + (details.getPrice()));
         holder.quantity.setText("(" + details.getQty() + ")");
         holder.marketPrice.setText("₹" + details.getMarktPrice());
-        if (pgbar!=null){
-            pgbar.setVisibility(View.GONE);
-        }
 
         Glide.with(context).load(details.getImgUri()).into(holder.profile_pic);
 
-        holder.pgbarrr.setVisibility(View.GONE);
+
         if (list.get(position).getAvailiable().equalsIgnoreCase("no")){
             holder.addToCart.setEnabled(false);
             holder.addToCart.setText("Not Available");
@@ -222,7 +224,7 @@ if (userId!=null){
         private LinearLayout cartlayout;
         private TextView price, quantityCart, marketPrice, title, offerPrice, quantity,notAvailable,addToCart;
         private ImageView profile_pic, minusCart, plusCart;
-        private ProgressBar pgbarrr;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -237,7 +239,7 @@ if (userId!=null){
             addToCart = itemView.findViewById(R.id.add_to_cart);
             offerPrice = itemView.findViewById(R.id.offer_price);
             marketPrice = itemView.findViewById(R.id.marketPrice);
-            pgbarrr = itemView.findViewById(R.id.pgbar);
+
             notAvailable = itemView.findViewById(R.id.not_available);
         }
     }

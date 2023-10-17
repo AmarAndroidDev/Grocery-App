@@ -34,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
+import com.ecs.dbsekycapi.ESignActivity;
 import com.example.groceryappp.Activity.AllModel.UserInfo;
 import com.example.groceryappp.Activity.Firebase.FirebaseClient;
 import com.example.groceryappp.Activity.Utills.ProgressDialogUtils;
@@ -71,7 +72,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class OtpActivity extends AppCompatActivity {
-
+private AppCompatButton verify;
     private double lattitude, longitude;
     private TextView userMob,otpTimer,resend,txtResend;
     private String City, Street, Pin, Landmark, FloorNo, fullAd;
@@ -87,7 +88,7 @@ private CountDownTimer countDownTimer;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
-
+verify=findViewById(R.id.verify);
         userMob=findViewById(R.id.mob);
         pinView=findViewById(R.id.otp);
         otpTimer=findViewById(R.id.otptimer);
@@ -120,7 +121,18 @@ private CountDownTimer countDownTimer;
                 permissionToken.continuePermissionRequest();
             }
         }).check();
-
+verify.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        if (pinView.getText().length()==6){
+            hideKeyboard();
+            verifyOtp();
+        }
+    else {
+            Toast.makeText(OtpActivity.this, "Invalid Otp", Toast.LENGTH_SHORT).show();
+        }
+    }
+});
         pinView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -135,11 +147,10 @@ private CountDownTimer countDownTimer;
             @Override
             public void afterTextChanged(Editable editable) {
 if (editable.length()==6){
-    hideKeyboard();
-    verifyOtp();
-   // verify.setBackgroundTintList(getResources().getColorStateList(R.color.buttonBg));
+
+    verify.setBackgroundTintList(getResources().getColorStateList(R.color.buttonBg));
 }else {
-   // verify.setBackgroundTintList(getResources().getColorStateList(R.color.buttonBglight));
+    verify.setBackgroundTintList(getResources().getColorStateList(R.color.buttonBglight));
 }
             }
         });
@@ -216,6 +227,7 @@ if (editable.length()==6){
     }
 
     private void sendOtp() {
+        pinView.setText("");
         findViewById(R.id.sendingotp).setVisibility(View.VISIBLE);
 resend.setEnabled(false);
             mCallbacks=new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){

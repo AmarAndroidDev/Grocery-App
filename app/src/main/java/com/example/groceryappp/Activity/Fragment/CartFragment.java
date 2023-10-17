@@ -1,9 +1,5 @@
 package com.example.groceryappp.Activity.Fragment;
 
-import static com.example.groceryappp.Activity.Utills.ProgressDialogUtils.hideProgressDialog;
-import static com.example.groceryappp.Activity.Utills.ProgressDialogUtils.showProgressDialog;
-import static com.example.groceryappp.Activity.Utills.SharedPreferenceManager.SELLER_CATEGORY_PREF_NAME;
-
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,7 +8,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -27,16 +22,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.example.groceryappp.Activity.Activity.HomeActivity;
-import com.example.groceryappp.Activity.Activity.UserOrderHeaderActivity;
 import com.example.groceryappp.Activity.Adapter.CartAdapter;
-import com.example.groceryappp.Activity.Adapter.HeadLineCircular;
 import com.example.groceryappp.Activity.AllModel.SingleProductDetails;
 import com.example.groceryappp.Activity.AllModel.UserInfo;
 import com.example.groceryappp.Activity.Firebase.FirebaseClient;
@@ -44,12 +34,9 @@ import com.example.groceryappp.Activity.Activity.UserPlaceOrderActivity;
 import com.example.groceryappp.Activity.Utills.FirebaseCallback;
 import com.example.groceryappp.Activity.Utills.SharedPreferenceManager;
 import com.example.groceryappp.R;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -123,6 +110,7 @@ public class CartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         viewInitialize(view);
         list = new ArrayList<>();
+
         rcvCart.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new CartAdapter(getContext(), list, CartAdapter.VIEW_TYPE_SINGLE_CART);
         rcvCart.setAdapter(adapter);

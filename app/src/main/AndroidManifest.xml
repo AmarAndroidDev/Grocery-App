@@ -27,6 +27,9 @@
         android:theme="@style/Theme.GroceryAppp"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.Activity.SingleProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Activity.OnBoardingActivity"
             android:exported="false" />
         <activity

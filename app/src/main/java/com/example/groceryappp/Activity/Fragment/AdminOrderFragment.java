@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -55,7 +56,8 @@ public class AdminOrderFragment extends Fragment implements InternetConnectivity
         auth = FirebaseAuth.getInstance();
         list = new ArrayList<>();
         adapter = new UserOrderHeaderAdapter(list, getContext(), "All orders");
-        rcvAdminOrder.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcvAdminOrder.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        //this reverse layout set true because it will show top of list ,which   list is  added
         rcvAdminOrder.setAdapter(adapter);
         gettingUserOrder();
         //set up recylerview
@@ -126,6 +128,7 @@ public class AdminOrderFragment extends Fragment implements InternetConnectivity
     public void onInternetConnected() {
 
     }
+
 
 
 }

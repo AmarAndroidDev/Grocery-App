@@ -76,7 +76,8 @@ public class SellerOrderDetailsActivity extends AppCompatActivity {
         list = new ArrayList<>();
         //set up recylerview
         adapter = new CartAdapter(SellerOrderDetailsActivity.this, list);
-        rcv.setLayoutManager(new LinearLayoutManager(this));
+        rcv.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+
         rcv.setAdapter(adapter);
 ///fetching orders single item
         database.collection("CurrentUser").document(auth.getUid()).collection("All orders").document(orderId).collection("items").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

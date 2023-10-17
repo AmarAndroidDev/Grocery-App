@@ -89,7 +89,7 @@ import java.util.concurrent.TimeUnit;public class LoginActivity extends AppCompa
     private InternetConnectivityReceiver connectivityReceiver;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private TextView  adminLogin, signUp;
-    private CardView guest,btnSignGoogle;
+    private CardView guest,btnSignGoogle,sendOtp;
     private TextInputEditText phNo;
 
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks;
@@ -111,34 +111,22 @@ import java.util.concurrent.TimeUnit;public class LoginActivity extends AppCompa
             public void onClick(View view) {
                 showAdminLoginDialog();
             }
+        }); sendOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (phNo.getText().length()==10){
+                    hideKeyboard();
+                    sendOtpToMobile();
+                    return;
+                }else {
+                    phNo.setError("Invalid Number");
+                }
+
+            }
         });
         getSupportActionBar().hide();
 
-        phNo.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String input = editable.toString().trim();
-                if (input.length() == 10) {
-                    phNo.setEnabled(false);
-
-                    hideKeyboard();
-
-                  sendOtpToMobile();
-
-
-
-                } else {
-                }
-            }
-        });
         ////
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         ////
@@ -256,12 +244,16 @@ import java.util.concurrent.TimeUnit;public class LoginActivity extends AppCompa
                                 phNo.setEnabled(true);
                                 findViewById(R.id.sendingotp).setVisibility(View.GONE);
                                 if (e instanceof FirebaseAuthInvalidCredentialsException) {
+
+                                    findViewById(R.id.sendingotp).setVisibility(View.GONE);
                                     Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                     // Invalid request
                                 } else if (e instanceof FirebaseTooManyRequestsException) {
+                                    findViewById(R.id.sendingotp).setVisibility(View.GONE);
                                     // The SMS quota for the project has been exceeded
                                     Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
+                                findViewById(R.id.sendingotp).setVisibility(View.GONE);
                                 Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
 
@@ -349,7 +341,7 @@ import java.util.concurrent.TimeUnit;public class LoginActivity extends AppCompa
 
     private void initilization() {
 
-
+sendOtp=findViewById(R.id.senOtp);
         guest = findViewById(R.id.guest);
         addressLayout = findViewById(R.id.addressLayout);
 

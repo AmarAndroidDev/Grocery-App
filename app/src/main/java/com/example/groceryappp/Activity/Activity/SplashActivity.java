@@ -38,8 +38,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-               isLogin();
+startActivity(new Intent(SplashActivity.this,ESign));
+              // isLogin();
 
             }
         }, 1000);

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.Fragment.UserHomeFragment">
+    tools:context="com.example.groceryappp.Activity.Fragment.UserHomeFragment">
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe"
 
@@ -16,7 +16,7 @@
 
 
         android:id="@+id/toolbar"
-        android:background="@color/bg2"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,27 +24,29 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+       android:background="@color/gray"
             android:id="@+id/txt"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="Delivery Here!!!"
+
             android:drawableTint="@color/white"
             android:textSize="14sp"
             android:textColor="@color/white"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:layout_marginTop="5dp"
 android:gravity="center_vertical"
             android:id="@+id/deliveryAd"
-            android:drawableStart="@drawable/bike2"
+      android:background="@color/gray"
             android:layout_below="@+id/txt"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="20dp"
 
             android:text=""
             android:drawableTint="@color/white"
             android:textSize="14sp"
             android:textColor="@color/white"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"/>
         <RelativeLayout
             android:id="@+id/realay"
@@ -56,30 +58,23 @@ android:gravity="center_vertical"
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_pic"
-
-
+android:background="@drawable/round_button"
+android:backgroundTint="@color/gray"
 
                 app:civ_border_width="1.5dp"
                 app:civ_border_color="@color/white"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/profilee"
+
                 />
-            <ProgressBar
-                android:id="@+id/pgbar"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                />
+
         </RelativeLayout>
         <androidx.appcompat.widget.AppCompatEditText
-            android:drawableEnd="@drawable/baseline_keyboard_voice_24"
           android:drawableTint="@color/fedblack"
             android:layout_marginTop="20dp"
-     android:editable="false"
+
             android:paddingEnd="10dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/gray"
             android:layout_below="@+id/realay"
             android:id="@+id/search"
             android:layout_width="match_parent"
@@ -88,11 +83,12 @@ android:gravity="center_vertical"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/round_bg"
-            android:drawableStart="@drawable/baseline_search_24"
+
+
             android:drawablePadding="5dp"
             android:gravity="center_vertical"
             android:paddingStart="10dp"
-            android:hint="Search Item..."
+
             android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="15sp"
@@ -143,25 +139,34 @@ android:gravity="center_vertical"
                                 android:layout_margin="5dp"
                                 android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/demo"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="5dp"
-                                    android:text="-Categories-"
-                                    android:textColor="@color/black"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold" />
+                                <com.facebook.shimmer.ShimmerFrameLayout
+                                    android:layout_below="@+id/linear"
+                                    android:id="@+id/shimmer_view_container"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:animateLayoutChanges="true"
+                                    android:animationCache="true"
+                                    app:shimmer_repeat_mode="restart"
+                                    app:shimmer_shape="linear"
 
-                                <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/rcv_vegHeadline"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
+                                    >
+                                    <LinearLayout
+                                        android:orientation="horizontal"
+
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+                                        <include layout="@layout/shimer_bg_headline_adapter"/>
+                                        <include layout="@layout/shimer_bg_headline_adapter"/>
+                                        <include layout="@layout/shimer_bg_headline_adapter"/>
+                                        <include layout="@layout/shimer_bg_headline_adapter"/>
+                                        <include layout="@layout/shimer_bg_headline_adapter"/>
+                                        <include layout="@layout/shimer_bg_headline_adapter"/>
 
 
-                                    />
+
+                                    </LinearLayout>
+
+                                </com.facebook.shimmer.ShimmerFrameLayout>
                             </LinearLayout>
 
                         </LinearLayout>
@@ -169,9 +174,11 @@ android:gravity="center_vertical"
 
 
 
-                        <androidx.viewpager.widget.ViewPager
+                        <androidx.cardview.widget.CardView
+                            android:backgroundTint="@color/gray"
                             android:layout_below="@+id/card"
                             android:id="@+id/viewpager1"
+                            app:cardCornerRadius="20dp"
                             android:layout_width="match_parent"
                             android:layout_height="180dp" />
 
@@ -191,54 +198,37 @@ android:gravity="center_vertical"
                             app:progressMode="true"
                             app:selectedDotColor="#3F51B5" />
 
-                        <LinearLayout
-                            android:background="@drawable/green_edittext_bg"
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                        android:layout_marginTop="10dp"
+                            android:layout_below="@+id/viewpager1"
+                            android:id="@+id/shimmer_view_contain"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/dots_indicator"
-android:layout_margin="5dp"
-                     >
-                            <RelativeLayout
-                                android:layout_margin="5dp"
-                                android:orientation="vertical"
+                            android:layout_height="match_parent"
+                            android:animateLayoutChanges="true"
+                            android:animationCache="true"
+                            app:shimmer_repeat_mode="restart"
+                            app:shimmer_shape="linear"
+
+                            >
+                            <LinearLayout
+                                android:orientation="horizontal"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
-                                <TextView
-                                    android:id="@+id/txtt"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_gravity="center"
-                                    android:text="-Regular Items-"
-                                    android:textStyle="bold"
-                                    android:textSize="14sp"
-                                    android:textColor="@color/black"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"/>
-                                <androidx.recyclerview.widget.RecyclerView
-
-                                    android:layout_marginEnd="5dp"
-                                    android:layout_below="@+id/txtt"
-                                    android:layout_centerHorizontal="true"
-                                    android:id="@+id/rcv_allveg"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
+                                <include layout="@layout/shimer_singel_price_details"/>
+                                <include layout="@layout/shimer_singel_price_details"/>
+                                <include layout="@layout/shimer_singel_price_details"/>
+                                <include layout="@layout/shimer_singel_price_details"/>
 
 
 
-                                    />
 
-                            </RelativeLayout>
+                            </LinearLayout>
 
-                        </LinearLayout>
-                        <com.jpardogo.android.googleprogressbar.library.GoogleProgressBar
+                        </com.facebook.shimmer.ShimmerFrameLayout>
 
-                            android:visibility="gone"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_marginBottom="20dp"
-                            android:layout_centerInParent="true"
-                            app:type="nexus_rotation_cross"
-                            app:layout_constraintVertical_bias="0.5" />
+
                     </RelativeLayout>
                 </ScrollView>
             </RelativeLayout>
@@ -249,30 +239,21 @@ android:layout_margin="5dp"
 
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    <LinearLayout
-
+ <!--   <LinearLayout
       android:id="@+id/pgbarHome"
         android:gravity="center"
         android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-        <com.facebook.shimmer.ShimmerFrameLayout
-
-            android:layout_below="@+id/linear"
-            android:id="@+id/shimmer_container"
+        android:layout_height="match_parent">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/pgLoading"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:animateLayoutChanges="true"
-            android:animationCache="true"
-            app:shimmer_repeat_mode="restart"
-            app:shimmer_shape="linear"
-
-            >
-           <include layout="@layout/shimmer_fragment_user_home"/>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-    </LinearLayout>
+            android:layout_height="100dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/fivevegeatbleloading" />
+    </LinearLayout>-->
 </RelativeLayout>
